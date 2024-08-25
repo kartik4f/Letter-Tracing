@@ -1,0 +1,1969 @@
+{
+	"name": "es_AlphabetSelectionSmall",
+	"events": [
+		{
+			"eventType": "include",
+			"includeSheet": "es_Common"
+		},
+		{
+			"eventType": "include",
+			"includeSheet": "es_Selection"
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 330000455613801
+				}
+			],
+			"actions": [
+				{
+					"id": "set-position",
+					"objectClass": "9Patch_ScrollerBg",
+					"sid": 518850905611939,
+					"parameters": {
+						"x": "ViewportRight(0)-Self.Width",
+						"y": "S2_Room_List_Panel.Y"
+					}
+				},
+				{
+					"id": "set-position",
+					"objectClass": "9Patch_Scroller_Handle",
+					"sid": 226695757232804,
+					"parameters": {
+						"x": "9Patch_ScrollerBg.X",
+						"y": "9Patch_ScrollerBg.Y"
+					}
+				},
+				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 395366273659443,
+					"parameters": {
+						"variable": "TracingType",
+						"value": "ArraySubjectType.At(SubjectTypeIndex)"
+					}
+				},
+				{
+					"type": "script",
+					"script": "let jsonData = runtime.objects.JsonEntryData.getFirstInstance().getJsonDataCopy();\n\nruntime.globalVars.LettersCount= Object.keys(jsonData.GameData[runtime.globalVars.SubjectTypeIndex].Played).length;"
+				},
+				{
+					"callFunction": "SetSmallLetterSelection",
+					"sid": 790311262796337
+				}
+			],
+			"sid": 402677682461680
+		},
+		{
+			"functionName": "SetSmallLetterSelection",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"callFunction": "CreateSmallLetters",
+					"sid": 500918617064499,
+					"parameters": [
+						"81.92",
+						"75",
+						"162",
+						"25",
+						"20",
+						"4"
+					]
+				}
+			],
+			"sid": 268247095166459,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "x_top",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 656647591837810
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 129486759244112,
+							"parameters": {
+								"first-value": "ViewportHeight(0)",
+								"comparison": 4,
+								"second-value": "S2_Room_List_Panel.Height+109"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 599480857061548,
+							"parameters": {
+								"variable": "x_top",
+								"value": "(ViewportHeight(0)-854)/2"
+							}
+						}
+					],
+					"sid": 153386575104193
+				}
+			]
+		},
+		{
+			"functionName": "CreateSmallLetters",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "letter_size",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 889677020186115
+				},
+				{
+					"name": "start_x",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 961597132464774
+				},
+				{
+					"name": "start_y",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 479201489511040
+				},
+				{
+					"name": "horiz_gap",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 951776739533328
+				},
+				{
+					"name": "vert_gap",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 226336282837638
+				},
+				{
+					"name": "letters_per_row",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 435436100058574
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "set-size",
+					"objectClass": "LettersArray",
+					"sid": 540021403536642,
+					"parameters": {
+						"width": "0",
+						"height": "1",
+						"depth": "1"
+					}
+				},
+				{
+					"id": "set-size",
+					"objectClass": "AlphabetsObjectsArray",
+					"sid": 735318377934129,
+					"parameters": {
+						"width": "0",
+						"height": "1",
+						"depth": "1"
+					}
+				}
+			],
+			"sid": 548162473120988,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "log",
+							"objectClass": "Browser",
+							"sid": 486552842361593,
+							"parameters": {
+								"type": "log",
+								"message": "JsonEntryData.CurrentKey"
+							}
+						}
+					],
+					"sid": 235086201457018
+				},
+				{
+					"eventType": "variable",
+					"name": "temp_x",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 772087060300026
+				},
+				{
+					"eventType": "variable",
+					"name": "temp_y",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 779304957941593
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 539905539427049,
+							"parameters": {
+								"variable": "temp_x",
+								"value": "start_x"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 668995957950845,
+							"parameters": {
+								"variable": "temp_y",
+								"value": "start_y"
+							}
+						}
+					],
+					"sid": 693857633409255
+				},
+				{
+					"eventType": "variable",
+					"name": "i",
+					"type": "number",
+					"initialValue": "1",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 144965158761251
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for-each",
+							"objectClass": "JsonEntryData",
+							"sid": 799991746359453,
+							"parameters": {
+								"path": "\".GameData.\"&SubjectTypeIndex&\".Played\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "create-object-by-name",
+							"objectClass": "System",
+							"sid": 718921199353834,
+							"parameters": {
+								"object-name": "\"white_\"&JsonEntryData.CurrentKey&\"2\"",
+								"layer": "\"Letters\"",
+								"x": "temp_x",
+								"y": "temp_y",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						}
+					],
+					"sid": 147891968930913,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-last-created",
+									"objectClass": "System",
+									"sid": 216936462404187,
+									"parameters": {
+										"object": "OriginalLetters"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-collisions-enabled",
+									"objectClass": "OriginalLetters",
+									"sid": 789951351611731,
+									"parameters": {
+										"collisions": "disabled"
+									}
+								},
+								{
+									"id": "set-default-color",
+									"objectClass": "OriginalLetters",
+									"sid": 466911227795505,
+									"parameters": {
+										"color": "rgb(192, 24, 133)"
+									}
+								},
+								{
+									"id": "set-scale",
+									"objectClass": "OriginalLetters",
+									"sid": 669677423620693,
+									"parameters": {
+										"scale": "0.60"
+									}
+								},
+								{
+									"id": "add-to-eventvar",
+									"objectClass": "System",
+									"sid": 777988878055053,
+									"parameters": {
+										"variable": "temp_x",
+										"value": "81.92+horiz_gap"
+									}
+								},
+								{
+									"id": "set-animation",
+									"objectClass": "OriginalLetters",
+									"sid": 298206600057992,
+									"parameters": {
+										"animation": "JsonEntryData.CurrentKey",
+										"from": "beginning"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "OriginalLetters",
+									"sid": 912650460501381,
+									"parameters": {
+										"instance-variable": "Letter",
+										"value": "JsonEntryData.CurrentKey"
+									}
+								},
+								{
+									"id": "push",
+									"objectClass": "LettersArray",
+									"sid": 144052737792480,
+									"parameters": {
+										"where": "back",
+										"value": "JsonEntryData.CurrentKey",
+										"axis": "x"
+									}
+								},
+								{
+									"id": "push",
+									"objectClass": "AlphabetsObjectsArray",
+									"sid": 621160243892264,
+									"parameters": {
+										"where": "back",
+										"value": "JsonEntryData.Get(\".imageName\")",
+										"axis": "x"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "OriginalLetters",
+									"sid": 525607380222933,
+									"parameters": {
+										"instance-variable": "Index",
+										"value": "i"
+									}
+								},
+								{
+									"id": "spawn-another-object",
+									"objectClass": "OriginalLetters",
+									"sid": 738835764220605,
+									"parameters": {
+										"object": "LetterEyes",
+										"layer": "\"Letters\"",
+										"image-point": "1",
+										"create-hierarchy": false
+									}
+								},
+								{
+									"id": "add-child",
+									"objectClass": "OriginalLetters",
+									"sid": 911488846991484,
+									"parameters": {
+										"child": "LetterEyes",
+										"transform-x": true,
+										"transform-y": true,
+										"transform-w": true,
+										"transform-h": true,
+										"transform-a": true,
+										"transform-z-elevation": true,
+										"destroy-with-parent": true
+									}
+								},
+								{
+									"id": "spawn-another-object",
+									"objectClass": "OriginalLetters",
+									"sid": 504455727612370,
+									"parameters": {
+										"object": "LetterMouth",
+										"layer": "\"Letters\"",
+										"image-point": "2",
+										"create-hierarchy": false
+									}
+								},
+								{
+									"id": "add-child",
+									"objectClass": "OriginalLetters",
+									"sid": 173442977743490,
+									"parameters": {
+										"child": "LetterMouth",
+										"transform-x": true,
+										"transform-y": true,
+										"transform-w": true,
+										"transform-h": true,
+										"transform-a": true,
+										"transform-z-elevation": true,
+										"destroy-with-parent": true
+									}
+								},
+								{
+									"id": "set-scale",
+									"objectClass": "LetterEyes",
+									"sid": 944642723899300,
+									"parameters": {
+										"scale": "0.07"
+									}
+								},
+								{
+									"id": "set-collisions-enabled",
+									"objectClass": "LetterEyes",
+									"sid": 440906638980067,
+									"parameters": {
+										"collisions": "disabled"
+									}
+								},
+								{
+									"id": "set-scale",
+									"objectClass": "LetterMouth",
+									"sid": 581222007288607,
+									"parameters": {
+										"scale": "0.068"
+									}
+								},
+								{
+									"id": "set-width",
+									"objectClass": "LetterMouth",
+									"sid": 663229136022608,
+									"parameters": {
+										"width": "Self.Width+5"
+									}
+								},
+								{
+									"id": "set-collisions-enabled",
+									"objectClass": "LetterMouth",
+									"sid": 608562708196117,
+									"parameters": {
+										"collisions": "disabled"
+									}
+								},
+								{
+									"id": "set-y",
+									"objectClass": "OriginalLetters",
+									"sid": 424211016795324,
+									"parameters": {
+										"y": "Self.Y-Self.Height/2"
+									}
+								},
+								{
+									"id": "set-boolean-instvar",
+									"objectClass": "OriginalLetters",
+									"sid": 705645365782481,
+									"parameters": {
+										"instance-variable": "Locked",
+										"value": "false"
+									}
+								},
+								{
+									"id": "set-boolean-instvar",
+									"objectClass": "OriginalLetters",
+									"sid": 502093138556316,
+									"parameters": {
+										"instance-variable": "Active",
+										"value": "true"
+									}
+								}
+							],
+							"sid": 220893896575753,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "evaluate-expression",
+											"objectClass": "System",
+											"sid": 642111399617851,
+											"parameters": {
+												"value": "OriginalLetters.Index%letters_per_row=0"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "add-to-eventvar",
+											"objectClass": "System",
+											"sid": 896737185549537,
+											"parameters": {
+												"variable": "temp_y",
+												"value": "letter_size+vert_gap"
+											}
+										},
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 513414601834164,
+											"parameters": {
+												"variable": "temp_x",
+												"value": "start_x"
+											}
+										}
+									],
+									"sid": 603660998057790
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 502296678385717,
+											"parameters": {
+												"first-value": "OriginalLetters.Index",
+												"comparison": 4,
+												"second-value": "int(LettersCount/letters_per_row)*letters_per_row"
+											}
+										},
+										{
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 841214929829566,
+											"parameters": {
+												"first-value": "LettersCount%letters_per_row",
+												"comparison": 1,
+												"second-value": "0"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-x",
+											"objectClass": "OriginalLetters",
+											"sid": 696934664299264,
+											"parameters": {
+												"x": "Self.X + (240 - start_x)  - ((LettersCount%letters_per_row)-1)*(letter_size+horiz_gap)/2"
+											}
+										}
+									],
+									"sid": 350485404338929
+								},
+								{
+									"eventType": "block",
+									"conditions": [],
+									"actions": [
+										{
+											"id": "pin-to-object-properties",
+											"objectClass": "OriginalLetters",
+											"sid": 319945838358451,
+											"behaviorType": "Pin",
+											"parameters": {
+												"pin-to": "S2_Room_List_Panel",
+												"x": true,
+												"y": true,
+												"angle": true,
+												"width-type": "no",
+												"height-type": "no",
+												"z": false
+											}
+										},
+										{
+											"id": "create-object",
+											"objectClass": "System",
+											"sid": 578156691011743,
+											"parameters": {
+												"object-to-create": "BadgeBIG",
+												"layer": "\"Letters\"",
+												"x": "OriginalLetters.X",
+												"y": "OriginalLetters.Y+letter_size/2+BadgeBIG.Height/2+5",
+												"create-hierarchy": false,
+												"template-name": "\"\""
+											}
+										}
+									],
+									"sid": 650266881465823,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "pick-last-created",
+													"objectClass": "System",
+													"sid": 237878082212468,
+													"parameters": {
+														"object": "BadgeBIG"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-default-color",
+													"objectClass": "BadgeBIG",
+													"sid": 919000623611472,
+													"parameters": {
+														"color": "Functions.GetBGColors(JsonEntryData.Get(\".count\"))"
+													}
+												},
+												{
+													"id": "set-scale",
+													"objectClass": "BadgeBIG",
+													"sid": 710951074358824,
+													"parameters": {
+														"scale": "0.6"
+													}
+												},
+												{
+													"id": "set-instvar-value",
+													"objectClass": "BadgeBIG",
+													"sid": 948173976075274,
+													"parameters": {
+														"instance-variable": "Index",
+														"value": "i"
+													}
+												},
+												{
+													"id": "set-collisions-enabled",
+													"objectClass": "BadgeBIG",
+													"sid": 813911000462193,
+													"parameters": {
+														"collisions": "disabled"
+													}
+												},
+												{
+													"id": "pin-to-object-properties",
+													"objectClass": "BadgeBIG",
+													"sid": 884118448973229,
+													"behaviorType": "Pin",
+													"parameters": {
+														"pin-to": "S2_Room_List_Panel",
+														"x": true,
+														"y": true,
+														"angle": true,
+														"width-type": "no",
+														"height-type": "no",
+														"z": false
+													}
+												},
+												{
+													"id": "spawn-another-object",
+													"objectClass": "BadgeBIG",
+													"sid": 444761982947554,
+													"parameters": {
+														"object": "BadgeBIG3",
+														"layer": "BadgeBIG.LayerName",
+														"image-point": "0",
+														"create-hierarchy": false
+													}
+												},
+												{
+													"id": "spawn-another-object",
+													"objectClass": "BadgeBIG",
+													"sid": 288332809523854,
+													"parameters": {
+														"object": "BadgeBIG2",
+														"layer": "BadgeBIG.LayerName",
+														"image-point": "0",
+														"create-hierarchy": false
+													}
+												}
+											],
+											"sid": 329556095153715
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "pick-last-created",
+													"objectClass": "System",
+													"sid": 431494191982125,
+													"parameters": {
+														"object": "BadgeBIG3"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-visible",
+													"objectClass": "BadgeBIG3",
+													"sid": 953399217364523,
+													"parameters": {
+														"visibility": "invisible"
+													}
+												}
+											],
+											"sid": 683129501209626,
+											"children": [
+												{
+													"eventType": "block",
+													"conditions": [
+														{
+															"id": "compare-two-values",
+															"objectClass": "System",
+															"sid": 486015845938698,
+															"parameters": {
+																"first-value": "JsonEntryData.Get(\".count\")",
+																"comparison": 5,
+																"second-value": "3"
+															}
+														}
+													],
+													"actions": [
+														{
+															"id": "set-visible",
+															"objectClass": "BadgeBIG3",
+															"sid": 377476732423321,
+															"parameters": {
+																"visibility": "visible"
+															}
+														},
+														{
+															"id": "pin-to-object-properties",
+															"objectClass": "BadgeBIG3",
+															"sid": 263477979221011,
+															"behaviorType": "Pin",
+															"parameters": {
+																"pin-to": "S2_Room_List_Panel",
+																"x": true,
+																"y": true,
+																"angle": true,
+																"width-type": "no",
+																"height-type": "no",
+																"z": false
+															}
+														},
+														{
+															"id": "set-scale",
+															"objectClass": "BadgeBIG3",
+															"sid": 973945897815640,
+															"parameters": {
+																"scale": "0.63"
+															}
+														},
+														{
+															"id": "move-to-top",
+															"objectClass": "BadgeBIG3",
+															"sid": 142044193023082
+														},
+														{
+															"id": "set-default-color",
+															"objectClass": "BadgeBIG3",
+															"sid": 648879813483360,
+															"parameters": {
+																"color": "rgb(250, 132, 34)"
+															}
+														},
+														{
+															"id": "set-collisions-enabled",
+															"objectClass": "BadgeBIG3",
+															"sid": 347839470606334,
+															"parameters": {
+																"collisions": "disabled"
+															}
+														},
+														{
+															"id": "tween-two-properties",
+															"objectClass": "BadgeBIG3",
+															"sid": 555937955442128,
+															"behaviorType": "Tween",
+															"parameters": {
+																"tags": "\"\"",
+																"property": "scale",
+																"end-x": "0.01",
+																"end-y": "0.01",
+																"time": "0.8",
+																"ease": "easeoutback",
+																"destroy-on-complete": "no",
+																"loop": "yes",
+																"ping-pong": "yes"
+															}
+														},
+														{
+															"id": "set-collisions-enabled",
+															"objectClass": "Badge",
+															"sid": 111225840455870,
+															"parameters": {
+																"collisions": "disabled"
+															}
+														}
+													],
+													"sid": 356854743195635
+												}
+											]
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "pick-last-created",
+													"objectClass": "System",
+													"sid": 192307752601582,
+													"parameters": {
+														"object": "BadgeBIG2"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-scale",
+													"objectClass": "BadgeBIG2",
+													"sid": 878045206668027,
+													"parameters": {
+														"scale": "0.42"
+													}
+												},
+												{
+													"id": "move-to-top",
+													"objectClass": "BadgeBIG2",
+													"sid": 273889944145870
+												},
+												{
+													"id": "set-default-color",
+													"objectClass": "BadgeBIG2",
+													"sid": 130499799090199,
+													"parameters": {
+														"color": "Functions.GetFGColors(JsonEntryData.Get(\".count\"))"
+													}
+												},
+												{
+													"id": "set-collisions-enabled",
+													"objectClass": "BadgeBIG2",
+													"sid": 452604967298041,
+													"parameters": {
+														"collisions": "disabled"
+													}
+												},
+												{
+													"id": "pin-to-object-properties",
+													"objectClass": "BadgeBIG2",
+													"sid": 200300929658874,
+													"behaviorType": "Pin",
+													"parameters": {
+														"pin-to": "S2_Room_List_Panel",
+														"x": true,
+														"y": true,
+														"angle": true,
+														"width-type": "no",
+														"height-type": "no",
+														"z": false
+													}
+												}
+											],
+											"sid": 479218255012261
+										}
+									]
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "evaluate-expression",
+											"objectClass": "System",
+											"sid": 269152360431900,
+											"parameters": {
+												"value": "JsonEntryData.Get(\".locked\")"
+											}
+										},
+										{
+											"id": "compare-boolean-eventvar",
+											"objectClass": "System",
+											"sid": 511027070250026,
+											"parameters": {
+												"variable": "IS_TESTING"
+											},
+											"isInverted": true
+										}
+									],
+									"actions": [
+										{
+											"id": "set-boolean-instvar",
+											"objectClass": "OriginalLetters",
+											"sid": 139787262932362,
+											"parameters": {
+												"instance-variable": "Locked",
+												"value": "true"
+											}
+										},
+										{
+											"id": "spawn-another-object",
+											"objectClass": "OriginalLetters",
+											"sid": 524303433872332,
+											"parameters": {
+												"object": "Lock",
+												"layer": "\"Letters\"",
+												"image-point": "0",
+												"create-hierarchy": false
+											}
+										},
+										{
+											"id": "set-position",
+											"objectClass": "Lock",
+											"sid": 740836542209667,
+											"parameters": {
+												"x": "OriginalLetters.X+OriginalLetters.Width/2",
+												"y": "OriginalLetters.Y-OriginalLetters.Height/2"
+											}
+										},
+										{
+											"id": "pin-to-object-properties",
+											"objectClass": "Lock",
+											"sid": 608114323145747,
+											"behaviorType": "Pin",
+											"parameters": {
+												"pin-to": "S2_Room_List_Panel",
+												"x": true,
+												"y": true,
+												"angle": true,
+												"width-type": "no",
+												"height-type": "no",
+												"z": false
+											}
+										},
+										{
+											"id": "set-collisions-enabled",
+											"objectClass": "Lock",
+											"sid": 231400002638660,
+											"parameters": {
+												"collisions": "disabled"
+											}
+										}
+									],
+									"sid": 882895168417002
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-height",
+									"objectClass": "S2_Room_List_Panel",
+									"sid": 987122296990469,
+									"parameters": {
+										"height": "max(745, temp_y-32-14)"
+									}
+								},
+								{
+									"id": "add-to-eventvar",
+									"objectClass": "System",
+									"sid": 525428979997705,
+									"parameters": {
+										"variable": "i",
+										"value": "1"
+									}
+								}
+							],
+							"sid": 864669827607367
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for-each",
+							"objectClass": "System",
+							"sid": 407547122350570,
+							"parameters": {
+								"object": "S2_Scroll_Mask"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "move-to-top",
+							"objectClass": "S2_Scroll_Mask",
+							"sid": 922971577415154
+						}
+					],
+					"sid": 299379277408365
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "wait",
+							"objectClass": "System",
+							"sid": 285672881457030,
+							"parameters": {
+								"seconds": "0.001"
+							}
+						}
+					],
+					"sid": 307895206889908,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 692384449854215,
+									"parameters": {
+										"first-value": "ViewportHeight(0)",
+										"comparison": 5,
+										"second-value": "S2_Room_List_Panel.Height+Top_Scroller_Padding"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-group-active",
+									"objectClass": "System",
+									"sid": 964475046228433,
+									"parameters": {
+										"group-name": "\"Scroll Letters\"",
+										"state": "deactivated"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 871547064260014,
+									"parameters": {
+										"variable": "y_top",
+										"value": "(ViewportTop(0)+Top_Scroller_Padding+S2_Room_List_Panel.Y)/2 +((ViewportBottom(0)-S2_Room_List_Panel.Y-S2_Room_List_Panel.Height-Bottom_Scroller_Paddiing)/2)"
+									}
+								},
+								{
+									"id": "set-y",
+									"objectClass": "S2_Room_List_Panel",
+									"sid": 749836014982102,
+									"parameters": {
+										"y": "y_top"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 878743652481378,
+									"parameters": {
+										"variable": "scroll_pos",
+										"value": "9Patch_Scroller_Handle.Y"
+									}
+								},
+								{
+									"id": "set-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 746385664448658,
+									"parameters": {
+										"variable": "CanScroll",
+										"value": "false"
+									}
+								},
+								{
+									"id": "set-enabled",
+									"objectClass": "S2_Room_List_Panel",
+									"sid": 345565329410071,
+									"behaviorType": "DragDrop",
+									"parameters": {
+										"state": "disabled"
+									}
+								},
+								{
+									"id": "set-visible",
+									"objectClass": "9Patch_ScrollerBg",
+									"sid": 554156655721765,
+									"parameters": {
+										"visibility": "invisible"
+									}
+								},
+								{
+									"id": "set-visible",
+									"objectClass": "9Patch_Scroller_Handle",
+									"sid": 919369711869174,
+									"parameters": {
+										"visibility": "invisible"
+									}
+								},
+								{
+									"id": "set-height",
+									"objectClass": "ClickableArea",
+									"sid": 165557974979239,
+									"parameters": {
+										"height": "S2_Room_List_Panel.Height"
+									}
+								},
+								{
+									"id": "set-position-to-another-object",
+									"objectClass": "ClickableArea",
+									"sid": 454619720500460,
+									"parameters": {
+										"object": "S2_Room_List_Panel",
+										"image-point-optional": "0"
+									}
+								},
+								{
+									"id": "set-position",
+									"objectClass": "9Patch_ScrollerBg",
+									"sid": 269314350496360,
+									"parameters": {
+										"x": "ViewportRight(0)-Self.Width",
+										"y": "S2_Room_List_Panel.Y"
+									}
+								},
+								{
+									"id": "set-height",
+									"objectClass": "9Patch_ScrollerBg",
+									"sid": 113376374982657,
+									"parameters": {
+										"height": "ViewportHeight(0) - (Top_Scroller_Padding+Bottom_Scroller_Paddiing)"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "9Patch_ScrollerBg",
+									"sid": 265092397046358,
+									"parameters": {
+										"instance-variable": "initial_Y_gap",
+										"value": "S2_Room_List_Panel.Height-Self.Height"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "9Patch_ScrollerBg",
+									"sid": 723967131515244,
+									"parameters": {
+										"instance-variable": "InitY",
+										"value": "S2_Room_List_Panel.Y"
+									}
+								},
+								{
+									"id": "set-position",
+									"objectClass": "9Patch_Scroller_Handle",
+									"sid": 252628403168461,
+									"parameters": {
+										"x": "9Patch_ScrollerBg.X",
+										"y": "9Patch_ScrollerBg.Y"
+									}
+								}
+							],
+							"sid": 145571813109288
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 256371427411507
+								}
+							],
+							"actions": [
+								{
+									"id": "wait",
+									"objectClass": "System",
+									"sid": 969324612829564,
+									"disabled": true,
+									"parameters": {
+										"seconds": "0.001"
+									}
+								},
+								{
+									"id": "set-group-active",
+									"objectClass": "System",
+									"sid": 874602376349882,
+									"parameters": {
+										"group-name": "\"Scroll Letters\"",
+										"state": "activated"
+									}
+								},
+								{
+									"id": "set-height",
+									"objectClass": "ClickableArea",
+									"sid": 462536834348506,
+									"parameters": {
+										"height": "S2_Room_List_Panel.Height"
+									}
+								},
+								{
+									"id": "set-position-to-another-object",
+									"objectClass": "ClickableArea",
+									"sid": 454577566997268,
+									"parameters": {
+										"object": "S2_Room_List_Panel",
+										"image-point-optional": "0"
+									}
+								},
+								{
+									"id": "set-position",
+									"objectClass": "9Patch_ScrollerBg",
+									"sid": 602056782168789,
+									"parameters": {
+										"x": "ViewportRight(0)-Self.Width",
+										"y": "S2_Room_List_Panel.Y"
+									}
+								},
+								{
+									"id": "set-height",
+									"objectClass": "9Patch_ScrollerBg",
+									"sid": 342596379722929,
+									"parameters": {
+										"height": "ViewportHeight(0) - (Top_Scroller_Padding+Bottom_Scroller_Paddiing)"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "9Patch_ScrollerBg",
+									"sid": 490989149703585,
+									"parameters": {
+										"instance-variable": "initial_Y_gap",
+										"value": "S2_Room_List_Panel.Height-Self.Height"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "9Patch_ScrollerBg",
+									"sid": 993246185580854,
+									"parameters": {
+										"instance-variable": "InitY",
+										"value": "S2_Room_List_Panel.Y"
+									}
+								},
+								{
+									"id": "set-position",
+									"objectClass": "9Patch_Scroller_Handle",
+									"sid": 162179862610326,
+									"parameters": {
+										"x": "9Patch_ScrollerBg.X",
+										"y": "9Patch_ScrollerBg.Y"
+									}
+								},
+								{
+									"id": "set-y",
+									"objectClass": "S2_Room_List_Panel",
+									"sid": 508167146690629,
+									"parameters": {
+										"y": "Self.Y-scroll_pos"
+									}
+								}
+							],
+							"sid": 559989156865726
+						}
+					]
+				}
+			]
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "Small Letter Selection Events",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-touched-object",
+							"objectClass": "Touch",
+							"sid": 403695629367134,
+							"parameters": {
+								"object": "OriginalLetters"
+							}
+						},
+						{
+							"id": "is-touching-object",
+							"objectClass": "Touch",
+							"sid": 266056068778955,
+							"parameters": {
+								"object": "ClickableArea"
+							}
+						},
+						{
+							"id": "is-boolean-instance-variable-set",
+							"objectClass": "OriginalLetters",
+							"sid": 888687569385413,
+							"parameters": {
+								"instance-variable": "Active"
+							}
+						},
+						{
+							"id": "is-any-playing",
+							"objectClass": "OriginalLetters",
+							"sid": 274044198772914,
+							"behaviorType": "Tween",
+							"isInverted": true
+						}
+					],
+					"actions": [
+						{
+							"id": "set-boolean-instvar",
+							"objectClass": "OriginalLetters",
+							"sid": 907722049999129,
+							"parameters": {
+								"instance-variable": "Active",
+								"value": "false"
+							}
+						},
+						{
+							"id": "tween-two-properties",
+							"objectClass": "OriginalLetters",
+							"sid": 205441958592953,
+							"behaviorType": "Tween",
+							"parameters": {
+								"tags": "\"\"",
+								"property": "scale",
+								"end-x": "0.5",
+								"end-y": "0.5",
+								"time": "0.08",
+								"ease": "easeinoutback",
+								"destroy-on-complete": "no",
+								"loop": "no",
+								"ping-pong": "yes"
+							}
+						},
+						{
+							"id": "wait-for-previous-actions",
+							"objectClass": "System",
+							"sid": 424505911924665
+						}
+					],
+					"sid": 691828181611416,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "OriginalLetters",
+									"sid": 732329833456113,
+									"parameters": {
+										"instance-variable": "Locked"
+									},
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"callFunction": "SendAnalytics",
+									"sid": 818940123902508,
+									"parameters": [
+										"\"toddler_sel_char=\"&OriginalLetters.Letter&\"&toddler_subtype=\"&ArraySubjectType.At(SubjectTypeIndex)&\"&EventName=\"&EventNames.Get(\"281\")"
+									]
+								},
+								{
+									"id": "set-object",
+									"objectClass": "CurrentLetterJSon",
+									"sid": 690978468403400,
+									"parameters": {
+										"path": "\"currentLetter\""
+									}
+								},
+								{
+									"id": "set-value",
+									"objectClass": "CurrentLetterJSon",
+									"sid": 601773075908167,
+									"parameters": {
+										"path": "\"currentLetter.letter\"",
+										"value": "OriginalLetters.Letter"
+									}
+								},
+								{
+									"id": "set-value",
+									"objectClass": "CurrentLetterJSon",
+									"sid": 193395247563831,
+									"parameters": {
+										"path": "\"currentLetter.index\"",
+										"value": "SubjectTypeIndex"
+									}
+								},
+								{
+									"id": "set-value",
+									"objectClass": "CurrentLetterJSon",
+									"sid": 788929509661972,
+									"parameters": {
+										"path": "\"currentLetter.subtype\"",
+										"value": "ArraySubjectType.At(SubjectTypeIndex)"
+									}
+								},
+								{
+									"id": "set-value",
+									"objectClass": "CurrentLetterJSon",
+									"sid": 284531126554191,
+									"parameters": {
+										"path": "\"currentLetter.imageName\"",
+										"value": "JsonEntryData.Get(\"GameData.\"&SubjectTypeIndex&\".Played.\"&OriginalLetters.Letter&\".imageName\")"
+									}
+								},
+								{
+									"id": "set-value",
+									"objectClass": "CurrentLetterJSon",
+									"sid": 287193094116893,
+									"parameters": {
+										"path": "\"currentLetter.objectName\"",
+										"value": "JsonEntryData.Get(\"GameData.\"&SubjectTypeIndex&\".Played.\"&OriginalLetters.Letter&\".objectName\")"
+									}
+								},
+								{
+									"id": "set-value",
+									"objectClass": "CurrentLetterJSon",
+									"sid": 660138852433259,
+									"parameters": {
+										"path": "\"currentLetter.letterObjClip\"",
+										"value": "JsonEntryData.Get(\"GameData.\"&SubjectTypeIndex&\".Played.\"&OriginalLetters.Letter&\".letterObjClip\")&\"_\"&country_lang_code"
+									}
+								},
+								{
+									"id": "set-value",
+									"objectClass": "CurrentLetterJSon",
+									"sid": 325214327484787,
+									"parameters": {
+										"path": "\"currentLetter.phoneticClip\"",
+										"value": "JsonEntryData.Get(\"GameData.\"&SubjectTypeIndex&\".Played.\"&OriginalLetters.Letter&\".phoneticClip\")&\"_\"&country_lang_code"
+									}
+								},
+								{
+									"id": "set-value",
+									"objectClass": "CurrentLetterJSon",
+									"sid": 829188896541696,
+									"parameters": {
+										"path": "\"currentLetter.mainAudioClip\"",
+										"value": "JsonEntryData.Get(\"GameData.\"&SubjectTypeIndex&\".Played.\"&OriginalLetters.Letter&\".mainAudioClip\")&\"_\"&country_lang_code"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 608677098853239,
+									"parameters": {
+										"variable": "CurrentLetterIndex",
+										"value": "OriginalLetters.Index-1"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 322223293661078,
+									"parameters": {
+										"variable": "scroll_pos",
+										"value": "9Patch_ScrollerBg.Y - S2_Room_List_Panel.Y"
+									}
+								},
+								{
+									"id": "go-to-layout-by-name",
+									"objectClass": "System",
+									"sid": 934327218769952,
+									"parameters": {
+										"layout": "\"Small-\"&LettersArray.At(CurrentLetterIndex)"
+									}
+								}
+							],
+							"sid": 308569060334753
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 771305058617338
+								}
+							],
+							"actions": [
+								{
+									"callFunction": "SendAnalytics",
+									"sid": 555899736802949,
+									"parameters": [
+										"\"toddler_sel_char=\"&OriginalLetters.Letter&\"&toddler_subtype=\"&ArraySubjectType.At(SubjectTypeIndex)&\"&EventName=\"&EventNames.Get(\"303\")"
+									]
+								},
+								{
+									"callFunction": "ShowLockSubscription",
+									"sid": 939147539612319,
+									"parameters": [
+										true,
+										"OriginalLetters.Letter",
+										"ArraySubjectType.At(SubjectTypeIndex)"
+									]
+								}
+							],
+							"sid": 898138652458966
+						}
+					]
+				},
+				{
+					"eventType": "group",
+					"disabled": false,
+					"title": "Scroll Letters Small",
+					"description": "",
+					"isActiveOnStart": false,
+					"children": [
+						{
+							"eventType": "comment",
+							"text": "Scroll By Dragging"
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "on-drag-start",
+									"objectClass": "S2_Room_List_Panel",
+									"sid": 658980328087679,
+									"behaviorType": "DragDrop"
+								}
+							],
+							"actions": [
+								{
+									"id": "set-speed",
+									"objectClass": "S2_Room_List_Panel",
+									"sid": 281141309066715,
+									"behaviorType": "Bullet",
+									"parameters": {
+										"speed": "0"
+									}
+								}
+							],
+							"sid": 282654167184732
+						},
+						{
+							"eventType": "comment",
+							"text": "inertia"
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "on-nth-touch-end",
+									"objectClass": "Touch",
+									"sid": 307906415470314,
+									"parameters": {
+										"touch-number": "0"
+									}
+								},
+								{
+									"id": "is-touching-object",
+									"objectClass": "Touch",
+									"sid": 446030119579667,
+									"parameters": {
+										"object": "S2_Room_List_Panel"
+									}
+								}
+							],
+							"actions": [],
+							"sid": 655091165795012,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "is-between-angles",
+											"objectClass": "System",
+											"sid": 907300560651270,
+											"parameters": {
+												"angle": "Touch.AngleAt(0)",
+												"first-angle": "60",
+												"second-angle": "120"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-speed",
+											"objectClass": "S2_Room_List_Panel",
+											"sid": 762675929781546,
+											"behaviorType": "Bullet",
+											"parameters": {
+												"speed": "Touch.SpeedAt(0)/3"
+											}
+										},
+										{
+											"id": "set-angle-of-motion",
+											"objectClass": "S2_Room_List_Panel",
+											"sid": 167460719850888,
+											"behaviorType": "Bullet",
+											"parameters": {
+												"angle": "90"
+											}
+										}
+									],
+									"sid": 237410606915426,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [],
+											"actions": [
+												{
+													"id": "set-acceleration",
+													"objectClass": "S2_Room_List_Panel",
+													"sid": 406807813811216,
+													"behaviorType": "Bullet",
+													"parameters": {
+														"acceleration": "-Self.Bullet.Speed"
+													}
+												}
+											],
+											"sid": 857739738714833
+										}
+									]
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "else",
+											"objectClass": "System",
+											"sid": 259893275139311
+										},
+										{
+											"id": "is-between-angles",
+											"objectClass": "System",
+											"sid": 282140136386875,
+											"parameters": {
+												"angle": "Touch.AngleAt(0)",
+												"first-angle": "240",
+												"second-angle": "300"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-speed",
+											"objectClass": "S2_Room_List_Panel",
+											"sid": 817109462710705,
+											"behaviorType": "Bullet",
+											"parameters": {
+												"speed": "Touch.SpeedAt(0)/3"
+											}
+										},
+										{
+											"id": "set-angle-of-motion",
+											"objectClass": "S2_Room_List_Panel",
+											"sid": 532206775525438,
+											"behaviorType": "Bullet",
+											"parameters": {
+												"angle": "-90"
+											}
+										}
+									],
+									"sid": 637120216439089,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [],
+											"actions": [
+												{
+													"id": "set-acceleration",
+													"objectClass": "S2_Room_List_Panel",
+													"sid": 320575076478419,
+													"behaviorType": "Bullet",
+													"parameters": {
+														"acceleration": "-Self.Bullet.Speed"
+													}
+												}
+											],
+											"sid": 565212765295096
+										}
+									]
+								}
+							]
+						},
+						{
+							"eventType": "comment",
+							"text": "Scroll By Mouse Wheel"
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "on-mouse-wheel",
+									"objectClass": "Mouse2",
+									"sid": 577504149297164,
+									"parameters": {
+										"direction": "up"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-speed",
+									"objectClass": "S2_Room_List_Panel",
+									"sid": 779623049131006,
+									"behaviorType": "Bullet",
+									"parameters": {
+										"speed": "800"
+									}
+								},
+								{
+									"id": "set-acceleration",
+									"objectClass": "S2_Room_List_Panel",
+									"sid": 855825711087752,
+									"behaviorType": "Bullet",
+									"parameters": {
+										"acceleration": "-2000"
+									}
+								},
+								{
+									"id": "set-angle-of-motion",
+									"objectClass": "S2_Room_List_Panel",
+									"sid": 162876041568554,
+									"behaviorType": "Bullet",
+									"parameters": {
+										"angle": "90"
+									}
+								}
+							],
+							"sid": 784479046638296
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "on-mouse-wheel",
+									"objectClass": "Mouse2",
+									"sid": 328764352689336,
+									"parameters": {
+										"direction": "down"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-speed",
+									"objectClass": "S2_Room_List_Panel",
+									"sid": 605966119978199,
+									"behaviorType": "Bullet",
+									"parameters": {
+										"speed": "800"
+									}
+								},
+								{
+									"id": "set-acceleration",
+									"objectClass": "S2_Room_List_Panel",
+									"sid": 737223738116385,
+									"behaviorType": "Bullet",
+									"parameters": {
+										"acceleration": "-2000"
+									}
+								},
+								{
+									"id": "set-angle-of-motion",
+									"objectClass": "S2_Room_List_Panel",
+									"sid": 215564274015392,
+									"behaviorType": "Bullet",
+									"parameters": {
+										"angle": "-90"
+									}
+								}
+							],
+							"sid": 636632331488733
+						},
+						{
+							"eventType": "comment",
+							"text": "Limit Scroll"
+						},
+						{
+							"eventType": "variable",
+							"name": "Scroll_Room_List_Top_Boundary",
+							"type": "number",
+							"initialValue": "109",
+							"comment": "853",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 366520549796134
+						},
+						{
+							"eventType": "variable",
+							"name": "Scroll_Room_List_Bot_Boundary",
+							"type": "number",
+							"initialValue": "854",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 814304137473443
+						},
+						{
+							"eventType": "variable",
+							"name": "padding",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 773053108884422
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 727057173492601,
+									"parameters": {
+										"variable": "Scroll_Room_List_Top_Boundary",
+										"value": "ViewportTop(0)+Top_Scroller_Padding"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 320687673317952,
+									"parameters": {
+										"variable": "Scroll_Room_List_Bot_Boundary",
+										"value": "ViewportBottom(0)"
+									}
+								}
+							],
+							"sid": 638428940122794
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 215532224553980,
+									"parameters": {
+										"first-value": "9Patch_Scroller_Handle.BBoxTop",
+										"comparison": 3,
+										"second-value": "9Patch_ScrollerBg.Y"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-y",
+									"objectClass": "9Patch_Scroller_Handle",
+									"sid": 756137858809791,
+									"parameters": {
+										"y": "9Patch_ScrollerBg.BBoxTop"
+									}
+								}
+							],
+							"sid": 802824895216207
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 586714073324119,
+									"parameters": {
+										"first-value": "9Patch_Scroller_Handle.BBoxBottom",
+										"comparison": 5,
+										"second-value": "9Patch_ScrollerBg.BBoxBottom"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-y",
+									"objectClass": "9Patch_Scroller_Handle",
+									"sid": 130009848055152,
+									"parameters": {
+										"y": "9Patch_ScrollerBg.BBoxBottom-9Patch_Scroller_Handle.Height"
+									}
+								}
+							],
+							"sid": 473128488355174
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-dragging",
+									"objectClass": "9Patch_Scroller_Handle",
+									"sid": 270151577927550,
+									"behaviorType": "DragDrop"
+								},
+								{
+									"id": "is-between-values",
+									"objectClass": "System",
+									"sid": 445281015196188,
+									"parameters": {
+										"value": "9Patch_Scroller_Handle.Y",
+										"lower-bound": "9Patch_ScrollerBg.Y",
+										"upper-bound": "9Patch_ScrollerBg.Y+9Patch_ScrollerBg.Height-9Patch_Scroller_Handle.Height"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-y",
+									"objectClass": "S2_Room_List_Panel",
+									"sid": 510715153155479,
+									"parameters": {
+										"y": "9Patch_ScrollerBg.Y- ((9Patch_Scroller_Handle.Y-9Patch_ScrollerBg.Y)*(S2_Room_List_Panel.Height-9Patch_ScrollerBg.Height)/(9Patch_ScrollerBg.Height-9Patch_Scroller_Handle.Height))"
+									}
+								}
+							],
+							"sid": 451908091355438
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-dragging",
+									"objectClass": "9Patch_Scroller_Handle",
+									"sid": 400307449729851,
+									"behaviorType": "DragDrop",
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"id": "set-y",
+									"objectClass": "S2_Room_List_Panel",
+									"sid": 943718660874406,
+									"parameters": {
+										"y": "clamp(Self.Y, Scroll_Room_List_Bot_Boundary-Self.Height-Bottom_Scroller_Paddiing, Scroll_Room_List_Top_Boundary)"
+									}
+								},
+								{
+									"id": "set-y",
+									"objectClass": "9Patch_Scroller_Handle",
+									"sid": 860271618388732,
+									"parameters": {
+										"y": "9Patch_ScrollerBg.Y+(9Patch_ScrollerBg.Height-9Patch_Scroller_Handle.Height)*(9Patch_ScrollerBg.Y-S2_Room_List_Panel.Y)/(9Patch_ScrollerBg.initial_Y_gap)"
+									}
+								}
+							],
+							"sid": 460259137687395
+						}
+					],
+					"sid": 829474233052104
+				}
+			],
+			"sid": 985895421724781
+		}
+	],
+	"sid": 547105519639128
+}

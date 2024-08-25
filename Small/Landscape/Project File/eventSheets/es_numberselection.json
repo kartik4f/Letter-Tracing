@@ -1,0 +1,1489 @@
+{
+	"name": "es_NumberSelection",
+	"events": [
+		{
+			"eventType": "include",
+			"includeSheet": "es_Common"
+		},
+		{
+			"eventType": "include",
+			"includeSheet": "es_SelectionMenu"
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 784042862735187
+				}
+			],
+			"actions": [
+				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 688138180444389,
+					"parameters": {
+						"variable": "TracingType",
+						"value": "JsonEntryData.Get(\"GameData.1.SubSubject\")"
+					}
+				},
+				{
+					"type": "script",
+					"script": "let jsonData = runtime.objects.JsonEntryData.getFirstInstance().getJsonDataCopy();\n\nruntime.globalVars.LettersCount= Object.keys(jsonData.GameData[1].Played).length;"
+				},
+				{
+					"callFunction": "CreateNumberLayout",
+					"sid": 653766071845058,
+					"parameters": [
+						"55",
+						"140",
+						"55",
+						"60",
+						"60",
+						"6"
+					]
+				}
+			],
+			"sid": 719036989681648
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "Number Selection Functions",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"functionName": "CreateNumberLayout",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "letter_size",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 939137642684229
+						},
+						{
+							"name": "start_x",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 624024125515499
+						},
+						{
+							"name": "start_y",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 505876179190404
+						},
+						{
+							"name": "horiz_gap",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 112274962138745
+						},
+						{
+							"name": "vert_gap",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 971166701390331
+						},
+						{
+							"name": "letters_per_row",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 443122225922769
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-size",
+							"objectClass": "LettersArray",
+							"sid": 349491158600551,
+							"parameters": {
+								"width": "0",
+								"height": "1",
+								"depth": "1"
+							}
+						},
+						{
+							"id": "set-size",
+							"objectClass": "AlphabetsObjectsArray",
+							"sid": 843526771187651,
+							"parameters": {
+								"width": "0",
+								"height": "1",
+								"depth": "1"
+							}
+						}
+					],
+					"sid": 606399496188110,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "temp_x",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 966960927351287
+						},
+						{
+							"eventType": "variable",
+							"name": "temp_y",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 663475537069411
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 325168705471498,
+									"parameters": {
+										"variable": "temp_x",
+										"value": "start_x"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 302651195545057,
+									"parameters": {
+										"variable": "temp_y",
+										"value": "start_y"
+									}
+								}
+							],
+							"sid": 129433198578694
+						},
+						{
+							"eventType": "variable",
+							"name": "i",
+							"type": "number",
+							"initialValue": "1",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 806835238549321
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "for-each",
+									"objectClass": "JsonEntryData",
+									"sid": 817045080672407,
+									"parameters": {
+										"path": "\".GameData.1.Played\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "push",
+									"objectClass": "LettersArray",
+									"sid": 487269777262883,
+									"parameters": {
+										"where": "back",
+										"value": "JsonEntryData.CurrentKey",
+										"axis": "x"
+									}
+								},
+								{
+									"id": "push",
+									"objectClass": "AlphabetsObjectsArray",
+									"sid": 425035496370258,
+									"parameters": {
+										"where": "back",
+										"value": "JsonEntryData.Get(\".imageName\")",
+										"axis": "x"
+									}
+								},
+								{
+									"callFunction": "CreateNumbers",
+									"sid": 455498184050076,
+									"parameters": [
+										"JsonEntryData.CurrentKey",
+										"temp_x",
+										"temp_y",
+										"JsonEntryData.Get(\".locked\")"
+									]
+								},
+								{
+									"callFunction": "CreateBadges",
+									"sid": 518869842383021,
+									"parameters": [
+										"temp_x",
+										"temp_y+55",
+										"\"Letters\"",
+										"JsonEntryData.Get(\".count\")",
+										"i"
+									]
+								},
+								{
+									"id": "add-to-eventvar",
+									"objectClass": "System",
+									"sid": 124898473981913,
+									"parameters": {
+										"variable": "temp_x",
+										"value": "letter_size+horiz_gap"
+									}
+								}
+							],
+							"sid": 731612297398163,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 322738601148159,
+											"parameters": {
+												"first-value": "i%letters_per_row",
+												"comparison": 0,
+												"second-value": "0"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 264279032252195,
+											"parameters": {
+												"variable": "temp_x",
+												"value": "start_x"
+											}
+										},
+										{
+											"id": "add-to-eventvar",
+											"objectClass": "System",
+											"sid": 899189407178974,
+											"parameters": {
+												"variable": "temp_y",
+												"value": "vert_gap+letter_size"
+											}
+										}
+									],
+									"sid": 313457889462549
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-eventvar",
+											"objectClass": "System",
+											"sid": 115607501847372,
+											"parameters": {
+												"variable": "i",
+												"comparison": 0,
+												"value": "18"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 659074162099859,
+											"parameters": {
+												"variable": "temp_x",
+												"value": "427 -  horiz_gap/2 - letter_size/2"
+											}
+										}
+									],
+									"sid": 717072890091301
+								},
+								{
+									"eventType": "block",
+									"conditions": [],
+									"actions": [
+										{
+											"id": "add-to-eventvar",
+											"objectClass": "System",
+											"sid": 425748808925568,
+											"parameters": {
+												"variable": "i",
+												"value": "1"
+											}
+										},
+										{
+											"id": "set-height",
+											"objectClass": "S2_Room_List_Panel",
+											"sid": 895294396880730,
+											"parameters": {
+												"height": "max(380, temp_y-letter_size)"
+											}
+										}
+									],
+									"sid": 708825715348619
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "for-each",
+									"objectClass": "System",
+									"sid": 296317714394994,
+									"parameters": {
+										"object": "S2_Scroll_Mask"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "move-to-top",
+									"objectClass": "S2_Scroll_Mask",
+									"sid": 248801517453073
+								}
+							],
+							"sid": 796472254627355
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-height",
+									"objectClass": "S2_Room_List_Panel",
+									"sid": 653954008047787,
+									"disabled": true,
+									"parameters": {
+										"height": "Self.Height+letter_size/2+20"
+									}
+								},
+								{
+									"callFunction": "SetLetters_Alignment",
+									"sid": 478168468710578,
+									"disabled": true
+								}
+							],
+							"sid": 574528065887423
+						}
+					]
+				},
+				{
+					"functionName": "CreateNumbers",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "name",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 702058384835521
+						},
+						{
+							"name": "x",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 384131409804977
+						},
+						{
+							"name": "y",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 177406625319591
+						},
+						{
+							"name": "locked",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 428459874712181
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 960964853178617,
+							"parameters": {
+								"object-to-create": "Container",
+								"layer": "\"Letters\"",
+								"x": "x",
+								"y": "y",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 800110216889052,
+							"parameters": {
+								"variable": "Top_Scroller_Padding",
+								"value": "100"
+							}
+						}
+					],
+					"sid": 918221733391129,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "temp_xx",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 114610881274663
+						},
+						{
+							"eventType": "variable",
+							"name": "gap",
+							"type": "number",
+							"initialValue": "15",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 997088030592098
+						},
+						{
+							"eventType": "variable",
+							"name": "loopcount",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 303616777665640
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-last-created",
+									"objectClass": "System",
+									"sid": 714277200883902,
+									"parameters": {
+										"object": "Container"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-scale",
+									"objectClass": "Container",
+									"sid": 984615439086310,
+									"parameters": {
+										"scale": "1.1"
+									}
+								},
+								{
+									"id": "set-visible",
+									"objectClass": "Container",
+									"sid": 962528557041027,
+									"parameters": {
+										"visibility": "visible"
+									}
+								},
+								{
+									"id": "set-boolean-instvar",
+									"objectClass": "Container",
+									"sid": 671261758143709,
+									"parameters": {
+										"instance-variable": "Locked",
+										"value": "false"
+									}
+								},
+								{
+									"id": "set-boolean-instvar",
+									"objectClass": "Container",
+									"sid": 685227072804775,
+									"parameters": {
+										"instance-variable": "Active",
+										"value": "true"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "Container",
+									"sid": 731778674285690,
+									"parameters": {
+										"instance-variable": "Index",
+										"value": "Self.IID+1"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "Container",
+									"sid": 831387858898001,
+									"parameters": {
+										"instance-variable": "Letter",
+										"value": "LettersArray.At(Container.IID)"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "Container",
+									"sid": 591945357910714,
+									"parameters": {
+										"instance-variable": "ImageName",
+										"value": "LettersArray.At(Container.IID)"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 339551445317167,
+									"parameters": {
+										"variable": "loopcount",
+										"value": "Functions.CountTens(Container.Index)"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 889853668473370,
+									"parameters": {
+										"variable": "temp_xx",
+										"value": "Container.X- (loopcount>0?gap:0)"
+									}
+								},
+								{
+									"id": "log",
+									"objectClass": "Browser",
+									"sid": 472714274192159,
+									"parameters": {
+										"type": "log",
+										"message": "\"tempxxxx:\"&temp_xx&\"loopcount: \"&loopcount"
+									}
+								},
+								{
+									"id": "set-x",
+									"objectClass": "Container",
+									"sid": 953560956376994,
+									"parameters": {
+										"x": "Self.X+(loopcount>0?10:0)"
+									}
+								}
+							],
+							"sid": 411088362790679,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-boolean-eventvar",
+											"objectClass": "System",
+											"sid": 670081333232739,
+											"parameters": {
+												"variable": "IS_TESTING"
+											},
+											"isInverted": true
+										},
+										{
+											"id": "compare-eventvar",
+											"objectClass": "System",
+											"sid": 216502384401360,
+											"parameters": {
+												"variable": "locked",
+												"comparison": 0,
+												"value": "1"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-boolean-instvar",
+											"objectClass": "Container",
+											"sid": 944050200126464,
+											"parameters": {
+												"instance-variable": "Locked",
+												"value": "true"
+											}
+										},
+										{
+											"id": "spawn-another-object",
+											"objectClass": "Container",
+											"sid": 160722551349364,
+											"parameters": {
+												"object": "Lock",
+												"layer": "\"Letters\"",
+												"image-point": "0",
+												"create-hierarchy": false
+											}
+										},
+										{
+											"id": "set-position",
+											"objectClass": "Lock",
+											"sid": 934852736011877,
+											"parameters": {
+												"x": "Container.X+Container.Width/2",
+												"y": "Container.Y-Container.Height/2"
+											}
+										},
+										{
+											"id": "move-to-object",
+											"objectClass": "Lock",
+											"sid": 163629725693499,
+											"parameters": {
+												"where": "in-front",
+												"object": "LetterMouth1"
+											}
+										},
+										{
+											"id": "move-to-object",
+											"objectClass": "Lock",
+											"sid": 511448435223585,
+											"parameters": {
+												"where": "in-front",
+												"object": "LetterEyes"
+											}
+										},
+										{
+											"id": "set-collisions-enabled",
+											"objectClass": "Lock",
+											"sid": 393862174984815,
+											"parameters": {
+												"collisions": "disabled"
+											}
+										}
+									],
+									"sid": 904595402201900
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "for",
+									"objectClass": "System",
+									"sid": 583783445170899,
+									"parameters": {
+										"name": "\"frames\"",
+										"start-index": "0",
+										"end-index": "loopcount"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "create-object-by-name",
+									"objectClass": "System",
+									"sid": 262239771150981,
+									"parameters": {
+										"object-name": "\"Num_\"&Container.Letter&\"_2\"",
+										"layer": "\"Letters\"",
+										"x": "temp_xx",
+										"y": "Container.Y",
+										"create-hierarchy": false,
+										"template-name": "\"\""
+									}
+								},
+								{
+									"id": "add-to-eventvar",
+									"objectClass": "System",
+									"sid": 150110797807918,
+									"parameters": {
+										"variable": "temp_xx",
+										"value": "30"
+									}
+								}
+							],
+							"sid": 863433382814055,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-last-created",
+											"objectClass": "System",
+											"sid": 377310334699012,
+											"parameters": {
+												"object": "OriginalLetters"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-scale",
+											"objectClass": "OriginalLetters",
+											"sid": 279434113297220,
+											"parameters": {
+												"scale": "0.66"
+											}
+										},
+										{
+											"id": "pin-to-object-properties",
+											"objectClass": "OriginalLetters",
+											"sid": 634256104397162,
+											"disabled": true,
+											"behaviorType": "Pin",
+											"parameters": {
+												"pin-to": "S2_Room_List_Panel",
+												"x": true,
+												"y": true,
+												"angle": true,
+												"width-type": "no",
+												"height-type": "no",
+												"z": false
+											}
+										},
+										{
+											"id": "set-default-color",
+											"objectClass": "OriginalLetters",
+											"sid": 119692272980206,
+											"parameters": {
+												"color": "rgb(192, 24, 133)"
+											}
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "OriginalLetters",
+											"sid": 759469528836465,
+											"parameters": {
+												"instance-variable": "Letter",
+												"value": "LettersArray.At(Container.IID)"
+											}
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "OriginalLetters",
+											"sid": 114948268689263,
+											"parameters": {
+												"instance-variable": "Index",
+												"value": "Container.Index"
+											}
+										},
+										{
+											"id": "set-animation-frame",
+											"objectClass": "OriginalLetters",
+											"sid": 955106069070506,
+											"parameters": {
+												"frame-number": "loopindex(\"frames\")"
+											}
+										},
+										{
+											"id": "set-visible",
+											"objectClass": "OriginalLetters",
+											"sid": 754414695995260,
+											"parameters": {
+												"visibility": "visible"
+											}
+										},
+										{
+											"id": "create-object",
+											"objectClass": "System",
+											"sid": 320336521081105,
+											"parameters": {
+												"object-to-create": "LetterEyes",
+												"layer": "\"Letters\"",
+												"x": "OriginalLetters.ImagePointX(1)",
+												"y": "OriginalLetters.ImagePointy(1)",
+												"create-hierarchy": false,
+												"template-name": "\"\""
+											}
+										},
+										{
+											"id": "add-child",
+											"objectClass": "OriginalLetters",
+											"sid": 321487232682879,
+											"parameters": {
+												"child": "LetterEyes",
+												"transform-x": true,
+												"transform-y": true,
+												"transform-w": true,
+												"transform-h": true,
+												"transform-a": true,
+												"transform-z-elevation": true,
+												"destroy-with-parent": true
+											}
+										},
+										{
+											"id": "spawn-another-object",
+											"objectClass": "OriginalLetters",
+											"sid": 303280472546239,
+											"parameters": {
+												"object": "LetterMouth1",
+												"layer": "\"Letters\"",
+												"image-point": "2",
+												"create-hierarchy": false
+											}
+										},
+										{
+											"id": "add-child",
+											"objectClass": "OriginalLetters",
+											"sid": 566680395528344,
+											"parameters": {
+												"child": "LetterMouth1",
+												"transform-x": true,
+												"transform-y": true,
+												"transform-w": true,
+												"transform-h": true,
+												"transform-a": true,
+												"transform-z-elevation": true,
+												"destroy-with-parent": true
+											}
+										},
+										{
+											"id": "set-collisions-enabled",
+											"objectClass": "LetterEyes",
+											"sid": 806267144415168,
+											"parameters": {
+												"collisions": "disabled"
+											}
+										},
+										{
+											"id": "set-collisions-enabled",
+											"objectClass": "LetterMouth1",
+											"sid": 614992206624333,
+											"parameters": {
+												"collisions": "disabled"
+											}
+										},
+										{
+											"id": "set-scale",
+											"objectClass": "LetterEyes",
+											"sid": 625871078703260,
+											"parameters": {
+												"scale": "0.07"
+											}
+										},
+										{
+											"id": "set-scale",
+											"objectClass": "LetterMouth1",
+											"sid": 734435611280481,
+											"parameters": {
+												"scale": "0.068"
+											}
+										},
+										{
+											"id": "log",
+											"objectClass": "Browser",
+											"sid": 104349495974044,
+											"parameters": {
+												"type": "log",
+												"message": "\"container iid\"&Container.Index&\"letter iid: \"& OriginalLetters.Index"
+											}
+										},
+										{
+											"id": "set-visible",
+											"objectClass": "Container",
+											"sid": 893016085626051,
+											"parameters": {
+												"visibility": "invisible"
+											}
+										},
+										{
+											"id": "add-child",
+											"objectClass": "Container",
+											"sid": 631636009201289,
+											"parameters": {
+												"child": "OriginalLetters",
+												"transform-x": true,
+												"transform-y": true,
+												"transform-w": true,
+												"transform-h": true,
+												"transform-a": true,
+												"transform-z-elevation": true,
+												"destroy-with-parent": false
+											}
+										},
+										{
+											"id": "pin-to-object-properties",
+											"objectClass": "Container",
+											"sid": 463112293868572,
+											"behaviorType": "Pin",
+											"parameters": {
+												"pin-to": "S2_Room_List_Panel",
+												"x": true,
+												"y": true,
+												"angle": true,
+												"width-type": "no",
+												"height-type": "no",
+												"z": false
+											}
+										},
+										{
+											"id": "set-collisions-enabled",
+											"objectClass": "Container",
+											"sid": 701107052571959,
+											"parameters": {
+												"collisions": "disabled"
+											}
+										},
+										{
+											"id": "set-collisions-enabled",
+											"objectClass": "OriginalLetters",
+											"sid": 772338262636454,
+											"parameters": {
+												"collisions": "disabled"
+											}
+										},
+										{
+											"id": "set-angle",
+											"objectClass": "LetterMouth1",
+											"sid": 267234386583805,
+											"parameters": {
+												"angle": "Functions.GetAngleOfMouth(OriginalLetters.Letter, OriginalLetters.AnimationFrame)"
+											}
+										}
+									],
+									"sid": 673046044327417
+								}
+							]
+						}
+					]
+				},
+				{
+					"functionName": "GetAngleOfMouth",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "number",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "letter",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 627014555579505
+						},
+						{
+							"name": "current_frame",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 742869888019271
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [
+						{
+							"type": "script",
+							"script": "\nlet returnValue = 0 ;\n\nif(localVars.letter.length == 2 && localVars.current_frame==1){\n\tlocalVars.letter = localVars.letter.charAt(localVars.letter.length - 1);\n}\nconsole.log(\"LETTER ::::\"+localVars.letter)\nswitch(localVars.letter)\n{\n\tcase \"3\":\n\treturnValue = -25;\n\tbreak\n\n\tcase \"5\":\n\treturnValue = 32;\n\tbreak\t\n\t\n\n\tcase \"6\":\n\treturnValue = 30;\n\tbreak\n\n\n\tcase \"9\":\n\treturnValue = -25;\n\tbreak\n\t\n\tdefault:\n\treturnValue = 0;\n}\n\nruntime.setReturnValue(returnValue);"
+						}
+					],
+					"sid": 487713632478698
+				},
+				{
+					"functionName": "CreateBadges",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "x",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 648585577704012
+						},
+						{
+							"name": "y",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 659134569420634
+						},
+						{
+							"name": "layer_name",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 942077209547305
+						},
+						{
+							"name": "count",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 787597669688692
+						},
+						{
+							"name": "i",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 532985374855777
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 756837438647350,
+							"parameters": {
+								"object-to-create": "BadgeBIG",
+								"layer": "layer_name",
+								"x": "x",
+								"y": "y",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						}
+					],
+					"sid": 892471944228192,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-last-created",
+									"objectClass": "System",
+									"sid": 959507189491575,
+									"parameters": {
+										"object": "BadgeBIG"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "pin-to-object-properties",
+									"objectClass": "BadgeBIG",
+									"sid": 282589524405586,
+									"behaviorType": "Pin",
+									"parameters": {
+										"pin-to": "S2_Room_List_Panel",
+										"x": true,
+										"y": true,
+										"angle": true,
+										"width-type": "no",
+										"height-type": "no",
+										"z": false
+									}
+								},
+								{
+									"id": "set-scale",
+									"objectClass": "BadgeBIG",
+									"sid": 167193639613949,
+									"parameters": {
+										"scale": "0.6"
+									}
+								},
+								{
+									"id": "set-default-color",
+									"objectClass": "BadgeBIG",
+									"sid": 995120140352567,
+									"parameters": {
+										"color": "Functions.GetBGColors(JsonEntryData.Get(\".count\"))"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "BadgeBIG",
+									"sid": 745667393463498,
+									"parameters": {
+										"instance-variable": "Index",
+										"value": "i"
+									}
+								},
+								{
+									"id": "spawn-another-object",
+									"objectClass": "BadgeBIG",
+									"sid": 948538543279030,
+									"parameters": {
+										"object": "BadgeBIG3",
+										"layer": "BadgeBIG.LayerName",
+										"image-point": "0",
+										"create-hierarchy": false
+									}
+								},
+								{
+									"id": "set-visible",
+									"objectClass": "BadgeBIG3",
+									"sid": 811620050265889,
+									"parameters": {
+										"visibility": "invisible"
+									}
+								},
+								{
+									"id": "spawn-another-object",
+									"objectClass": "BadgeBIG",
+									"sid": 609188968042566,
+									"parameters": {
+										"object": "BadgeBIG2",
+										"layer": "BadgeBIG.LayerName",
+										"image-point": "0",
+										"create-hierarchy": false
+									}
+								},
+								{
+									"id": "set-scale",
+									"objectClass": "BadgeBIG2",
+									"sid": 577867051591125,
+									"parameters": {
+										"scale": "0.42"
+									}
+								},
+								{
+									"id": "set-default-color",
+									"objectClass": "BadgeBIG2",
+									"sid": 781615637840436,
+									"parameters": {
+										"color": "Functions.GetFGColors(JsonEntryData.Get(\".count\"))"
+									}
+								}
+							],
+							"sid": 438232383758930
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-last-created",
+									"objectClass": "System",
+									"sid": 520344881275596,
+									"parameters": {
+										"object": "BadgeBIG2"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "pin-to-object-properties",
+									"objectClass": "BadgeBIG2",
+									"sid": 113616640991596,
+									"behaviorType": "Pin",
+									"parameters": {
+										"pin-to": "S2_Room_List_Panel",
+										"x": true,
+										"y": true,
+										"angle": true,
+										"width-type": "no",
+										"height-type": "no",
+										"z": false
+									}
+								}
+							],
+							"sid": 581061195069338
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-last-created",
+									"objectClass": "System",
+									"sid": 380630058962344,
+									"parameters": {
+										"object": "BadgeBIG3"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "pin-to-object-properties",
+									"objectClass": "BadgeBIG3",
+									"sid": 625664132292855,
+									"behaviorType": "Pin",
+									"parameters": {
+										"pin-to": "S2_Room_List_Panel",
+										"x": true,
+										"y": true,
+										"angle": true,
+										"width-type": "no",
+										"height-type": "no",
+										"z": false
+									}
+								}
+							],
+							"sid": 910768778820147
+						}
+					]
+				}
+			],
+			"sid": 875135809787670
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "Number Selection Events",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-created",
+							"objectClass": "Badge",
+							"sid": 883949239533285
+						}
+					],
+					"actions": [
+						{
+							"id": "pin-to-object-properties",
+							"objectClass": "Badge",
+							"sid": 881531276637438,
+							"behaviorType": "Pin",
+							"parameters": {
+								"pin-to": "S2_Room_List_Panel",
+								"x": true,
+								"y": true,
+								"angle": true,
+								"width-type": "no",
+								"height-type": "no",
+								"z": false
+							}
+						}
+					],
+					"sid": 843364568113881
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-touched-object",
+							"objectClass": "Touch",
+							"sid": 546488103193189,
+							"parameters": {
+								"object": "Container"
+							}
+						},
+						{
+							"id": "is-boolean-instance-variable-set",
+							"objectClass": "Container",
+							"sid": 391015753582867,
+							"parameters": {
+								"instance-variable": "Active"
+							}
+						},
+						{
+							"id": "is-any-playing",
+							"objectClass": "Container",
+							"sid": 735131712592707,
+							"behaviorType": "Tween",
+							"isInverted": true
+						}
+					],
+					"actions": [
+						{
+							"id": "set-boolean-instvar",
+							"objectClass": "Container",
+							"sid": 860838985123444,
+							"parameters": {
+								"instance-variable": "Active",
+								"value": "false"
+							}
+						},
+						{
+							"id": "tween-two-properties",
+							"objectClass": "Container",
+							"sid": 371306995959018,
+							"behaviorType": "Tween",
+							"parameters": {
+								"tags": "\"\"",
+								"property": "scale",
+								"end-x": "0.84",
+								"end-y": "0.84",
+								"time": "0.08",
+								"ease": "easeinoutback",
+								"destroy-on-complete": "no",
+								"loop": "no",
+								"ping-pong": "yes"
+							}
+						},
+						{
+							"id": "wait-for-previous-actions",
+							"objectClass": "System",
+							"sid": 988446646292033
+						}
+					],
+					"sid": 657348252057972,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "Container",
+									"sid": 251632760988197,
+									"parameters": {
+										"instance-variable": "Locked"
+									},
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"callFunction": "SendAnalytics",
+									"sid": 320651784870408,
+									"parameters": [
+										"\"toddler_sel_char=\"&Container.Letter&\"&toddler_subtype=123&EventName=\"&EventNames.Get(\"284\")"
+									]
+								},
+								{
+									"id": "set-object",
+									"objectClass": "CurrentLetterJSon",
+									"sid": 899811519843311,
+									"parameters": {
+										"path": "\"currentLetter\""
+									}
+								},
+								{
+									"id": "set-value",
+									"objectClass": "CurrentLetterJSon",
+									"sid": 229271819178209,
+									"parameters": {
+										"path": "\"currentLetter.index\"",
+										"value": "1"
+									}
+								},
+								{
+									"id": "set-value",
+									"objectClass": "CurrentLetterJSon",
+									"sid": 943214040436620,
+									"parameters": {
+										"path": "\"currentLetter.subtype\"",
+										"value": "\"123\""
+									}
+								},
+								{
+									"id": "set-value",
+									"objectClass": "CurrentLetterJSon",
+									"sid": 478030477974053,
+									"parameters": {
+										"path": "\"currentLetter.letter\"",
+										"value": "Container.Letter"
+									}
+								},
+								{
+									"id": "set-value",
+									"objectClass": "CurrentLetterJSon",
+									"sid": 680523837055464,
+									"parameters": {
+										"path": "\"currentLetter.imageName\"",
+										"value": "\"\""
+									}
+								},
+								{
+									"id": "set-value",
+									"objectClass": "CurrentLetterJSon",
+									"sid": 778044285930807,
+									"parameters": {
+										"path": "\"currentLetter.objectName\"",
+										"value": "\"\""
+									}
+								},
+								{
+									"id": "set-value",
+									"objectClass": "CurrentLetterJSon",
+									"sid": 887417776553983,
+									"parameters": {
+										"path": "\"currentLetter.letterObjClip\"",
+										"value": "\"\""
+									}
+								},
+								{
+									"id": "set-value",
+									"objectClass": "CurrentLetterJSon",
+									"sid": 887392442620527,
+									"parameters": {
+										"path": "\"currentLetter.phoneticClip\"",
+										"value": "JsonEntryData.Get(\"GameData.1.Played.\"&Container.Letter&\".mainAudioClip\")&\"_\"&country_lang_code"
+									}
+								},
+								{
+									"id": "set-value",
+									"objectClass": "CurrentLetterJSon",
+									"sid": 140148520623167,
+									"parameters": {
+										"path": "\"currentLetter.mainAudioClip\"",
+										"value": "(\"Number_count_\" & Functions.getCountNumber(int(Container.Letter)) & \"_\") & country_lang_code"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 278649455739302,
+									"parameters": {
+										"variable": "CurrentLetterIndex",
+										"value": "Container.Index-1"
+									}
+								},
+								{
+									"id": "go-to-layout-by-name",
+									"objectClass": "System",
+									"sid": 788345459168682,
+									"parameters": {
+										"layout": "\"Number-\"&LettersArray.At(CurrentLetterIndex)"
+									}
+								}
+							],
+							"sid": 766635523017003
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 721601995732157
+								},
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "Container",
+									"sid": 710300400466349,
+									"parameters": {
+										"instance-variable": "Locked"
+									}
+								}
+							],
+							"actions": [
+								{
+									"callFunction": "SendAnalytics",
+									"sid": 502283163247096,
+									"parameters": [
+										"\"toddler_sel_char=\"&Container.Letter&\"&toddler_subtype=123&EventName=\"&EventNames.Get(\"303\")"
+									]
+								},
+								{
+									"callFunction": "ShowLockSubscription",
+									"sid": 547330290876978,
+									"parameters": [
+										true,
+										"Container.Letter",
+										"\"123\""
+									]
+								}
+							],
+							"sid": 265970258379013
+						}
+					]
+				}
+			],
+			"sid": 844616436577801
+		}
+	],
+	"sid": 582111872264386
+}

@@ -1,0 +1,314 @@
+{
+	"name": "es_Selection",
+	"events": [
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "Dialogs Events",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-touched-object",
+							"objectClass": "Touch",
+							"sid": 156692293503587,
+							"parameters": {
+								"object": "BtnDialogOk"
+							}
+						},
+						{
+							"id": "is-boolean-instance-variable-set",
+							"objectClass": "BtnDialogOk",
+							"sid": 121130519144050,
+							"parameters": {
+								"instance-variable": "Enable"
+							}
+						},
+						{
+							"id": "is-playing",
+							"objectClass": "BtnDialogOk",
+							"sid": 711176470998977,
+							"behaviorType": "Tween",
+							"parameters": {
+								"tags": "\"bounce-ok\""
+							},
+							"isInverted": true
+						}
+					],
+					"actions": [
+						{
+							"id": "set-boolean-instvar",
+							"objectClass": "BtnDialogOk",
+							"sid": 155781303835201,
+							"parameters": {
+								"instance-variable": "Enable",
+								"value": "false"
+							}
+						},
+						{
+							"id": "play-by-name",
+							"objectClass": "Audio",
+							"sid": 579520398986188,
+							"parameters": {
+								"folder": "sounds",
+								"audio-file-name": "\"Button_pressed\"",
+								"loop": "not-looping",
+								"volume": "0",
+								"stereo-pan": "0",
+								"tag-optional": "\"Button_pressed\""
+							}
+						},
+						{
+							"id": "tween-two-properties",
+							"objectClass": "BtnDialogOk",
+							"sid": 318098286182606,
+							"behaviorType": "Tween",
+							"parameters": {
+								"tags": "\"bounce-ok\"",
+								"property": "scale",
+								"end-x": "0.88",
+								"end-y": "0.88",
+								"time": "0.1",
+								"ease": "noease",
+								"destroy-on-complete": "no",
+								"loop": "no",
+								"ping-pong": "yes"
+							}
+						},
+						{
+							"id": "wait-for-previous-actions",
+							"objectClass": "System",
+							"sid": 123877042047516
+						},
+						{
+							"callFunction": "ShowLockSubscription",
+							"sid": 595452100717504,
+							"parameters": [
+								false,
+								"DialogSubs.Letter",
+								"DialogSubs.type"
+							]
+						}
+					],
+					"sid": 456020403071285
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-touched-object",
+							"objectClass": "Touch",
+							"sid": 783117390090408,
+							"parameters": {
+								"object": "BTNSSound"
+							}
+						},
+						{
+							"id": "is-playing",
+							"objectClass": "BTNSSound",
+							"sid": 871191446742798,
+							"behaviorType": "Tween",
+							"parameters": {
+								"tags": "\"bounce-snd\""
+							},
+							"isInverted": true
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "PlayUnitySound",
+							"sid": 669410455211476,
+							"disabled": true,
+							"parameters": [
+								"\"EventName=\"&EventNames.Get(\"249\")"
+							]
+						},
+						{
+							"id": "tween-two-properties",
+							"objectClass": "BTNSSound",
+							"sid": 471208105827272,
+							"behaviorType": "Tween",
+							"parameters": {
+								"tags": "\"bounce-snd\"",
+								"property": "scale",
+								"end-x": "0.7",
+								"end-y": "0.7",
+								"time": "0.3",
+								"ease": "easeinbounce",
+								"destroy-on-complete": "no",
+								"loop": "no",
+								"ping-pong": "yes"
+							}
+						},
+						{
+							"id": "play-by-name",
+							"objectClass": "Audio",
+							"sid": 906738126806590,
+							"parameters": {
+								"folder": "sounds",
+								"audio-file-name": "\"Button_pressed\"",
+								"loop": "not-looping",
+								"volume": "0",
+								"stereo-pan": "0",
+								"tag-optional": "\"Button_pressed\""
+							}
+						},
+						{
+							"id": "wait-for-previous-actions",
+							"objectClass": "System",
+							"sid": 319938646675111
+						},
+						{
+							"callFunction": "SendAnalytics",
+							"sid": 431422986210275,
+							"parameters": [
+								"\"EventName=\"&EventNames.Get(\"249\")"
+							]
+						},
+						{
+							"id": "stop",
+							"objectClass": "Audio",
+							"sid": 831836356013597,
+							"parameters": {
+								"tag": "\"get_a_grownup\""
+							}
+						},
+						{
+							"id": "play-by-name",
+							"objectClass": "Audio",
+							"sid": 137590725899474,
+							"parameters": {
+								"folder": "sounds",
+								"audio-file-name": "\"get_a_grownup_\"&country_lang_code",
+								"loop": "not-looping",
+								"volume": "0",
+								"stereo-pan": "0",
+								"tag-optional": "\"get_a_grownup\""
+							}
+						}
+					],
+					"sid": 844694171465219
+				}
+			],
+			"sid": 732216499801929
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 942700224895853
+				}
+			],
+			"actions": [
+				{
+					"id": "set-group-active",
+					"objectClass": "System",
+					"sid": 751689762723051,
+					"parameters": {
+						"group-name": "\"Dialogs Events\"",
+						"state": "deactivated"
+					}
+				},
+				{
+					"id": "set-layer-visible",
+					"objectClass": "System",
+					"sid": 234649345190198,
+					"parameters": {
+						"layer": "\"Dialogs\"",
+						"visibility": "invisible"
+					}
+				},
+				{
+					"id": "stop-animation",
+					"objectClass": "BtnDialogOk",
+					"sid": 429236761700662
+				},
+				{
+					"id": "set-animation-frame",
+					"objectClass": "BtnDialogOk",
+					"sid": 755378365019735,
+					"parameters": {
+						"frame-number": "0"
+					}
+				},
+				{
+					"id": "stop-animation",
+					"objectClass": "BTNSSound",
+					"sid": 810522728635650
+				},
+				{
+					"id": "set-animation-frame",
+					"objectClass": "BTNSSound",
+					"sid": 148038082591711,
+					"parameters": {
+						"frame-number": "0"
+					}
+				},
+				{
+					"callFunction": "SetBodyHTMLColor",
+					"sid": 866710305280824,
+					"parameters": [
+						"LayoutName"
+					]
+				},
+				{
+					"id": "set-text",
+					"objectClass": "TextSubscribeDialogTitle",
+					"sid": 962627552786508,
+					"parameters": {
+						"text": "SubscriptionDialogHeader"
+					}
+				},
+				{
+					"id": "set-text",
+					"objectClass": "TextDialogBody",
+					"sid": 231209963108057,
+					"parameters": {
+						"text": "SubscriptionDialogBody"
+					}
+				},
+				{
+					"id": "set-text",
+					"objectClass": "TextBtnSubscribeOK",
+					"sid": 330504728728477,
+					"parameters": {
+						"text": "SubscriptionDialogFooter"
+					}
+				},
+				{
+					"id": "set-boolean-eventvar",
+					"objectClass": "System",
+					"sid": 596117139470381,
+					"parameters": {
+						"variable": "CanStartTimer",
+						"value": "false"
+					}
+				},
+				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 691347422338158,
+					"parameters": {
+						"variable": "TimeLapsed",
+						"value": "0"
+					}
+				},
+				{
+					"id": "set-font-size",
+					"objectClass": "TextBtnSubscribeOK",
+					"sid": 388858750800624,
+					"parameters": {
+						"size-pt": "len(Self.Text)>17?18:20"
+					}
+				}
+			],
+			"sid": 676838024278518
+		}
+	],
+	"sid": 439091403408415
+}

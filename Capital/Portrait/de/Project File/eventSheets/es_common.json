@@ -1,0 +1,1666 @@
+{
+	"name": "es_Common",
+	"events": [
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "HUD",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-touched-object",
+							"objectClass": "Touch",
+							"sid": 939692692716605,
+							"parameters": {
+								"object": "HomeButton"
+							}
+						},
+						{
+							"id": "is-boolean-instance-variable-set",
+							"objectClass": "HomeButton",
+							"sid": 805187742990779,
+							"parameters": {
+								"instance-variable": "Touch"
+							}
+						},
+						{
+							"id": "is-playing",
+							"objectClass": "HomeBtnIcons",
+							"sid": 456212027907035,
+							"behaviorType": "Tween",
+							"parameters": {
+								"tags": "\"bounce-home\""
+							},
+							"isInverted": true
+						}
+					],
+					"actions": [
+						{
+							"id": "set-boolean-instvar",
+							"objectClass": "HomeButton",
+							"sid": 225922106611632,
+							"parameters": {
+								"instance-variable": "Touch",
+								"value": "false"
+							}
+						},
+						{
+							"id": "play-by-name",
+							"objectClass": "Audio",
+							"sid": 393905218461593,
+							"parameters": {
+								"folder": "sounds",
+								"audio-file-name": "\"Button_pressed\"",
+								"loop": "not-looping",
+								"volume": "0",
+								"stereo-pan": "0",
+								"tag-optional": "\"Button_pressed\""
+							}
+						},
+						{
+							"id": "tween-two-properties",
+							"objectClass": "HomeBtnIcons",
+							"sid": 745979928781093,
+							"behaviorType": "Tween",
+							"parameters": {
+								"tags": "\"bounce-home\"",
+								"property": "size",
+								"end-x": "47",
+								"end-y": "47",
+								"time": "0.3",
+								"ease": "easeinbounce",
+								"destroy-on-complete": "no",
+								"loop": "no",
+								"ping-pong": "yes"
+							}
+						},
+						{
+							"id": "wait-for-previous-actions",
+							"objectClass": "System",
+							"sid": 738585663824996
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 135094651284627,
+							"parameters": {
+								"variable": "scroll_pos",
+								"value": "0"
+							}
+						}
+					],
+					"sid": 450521577841374,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "targetLayout",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 865158551068673
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 924505569472277,
+									"parameters": {
+										"first-value": "LayoutName",
+										"comparison": 0,
+										"second-value": "\"Home\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "wait",
+									"objectClass": "System",
+									"sid": 926030024690700,
+									"disabled": true,
+									"parameters": {
+										"seconds": "0.22"
+									}
+								},
+								{
+									"id": "set-boolean-instvar",
+									"objectClass": "HomeButton",
+									"sid": 263265042320050,
+									"parameters": {
+										"instance-variable": "Touch",
+										"value": "true"
+									}
+								},
+								{
+									"callFunction": "ExitFromGame",
+									"sid": 329885057106063,
+									"parameters": [
+										"\"EventName=\"&EventNames.Get(\"288\")"
+									]
+								}
+							],
+							"sid": 321510426100467,
+							"isOrBlock": true
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 258452852053865
+								},
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 629842018197095,
+									"parameters": {
+										"first-value": "find(LayoutName,\"Alphabet Selection\")",
+										"comparison": 1,
+										"second-value": "-1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "wait",
+									"objectClass": "System",
+									"sid": 951541228592345,
+									"disabled": true,
+									"parameters": {
+										"seconds": "0.22"
+									}
+								},
+								{
+									"callFunction": "ExitFromGame",
+									"sid": 454475606554159,
+									"parameters": [
+										"\"EventName=\"&EventNames.Get(\"296\")&\"&SubjectSubType=\"&TracingType"
+									]
+								}
+							],
+							"sid": 826897389791167
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 315782105165638
+								},
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 724808213442014,
+									"parameters": {
+										"first-value": "LayoutName",
+										"comparison": 0,
+										"second-value": "\"Number Selection\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "wait",
+									"objectClass": "System",
+									"sid": 870561083292049,
+									"disabled": true,
+									"parameters": {
+										"seconds": "0.22"
+									}
+								},
+								{
+									"id": "set-boolean-instvar",
+									"objectClass": "HomeButton",
+									"sid": 986180919629600,
+									"parameters": {
+										"instance-variable": "Touch",
+										"value": "true"
+									}
+								},
+								{
+									"callFunction": "ExitFromGame",
+									"sid": 812019002491779,
+									"parameters": [
+										"\"EventName=\"&EventNames.Get(\"297\")&\"&SubjectSubType=\"&TracingType"
+									]
+								}
+							],
+							"sid": 452018530440039
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 904868657528431
+								},
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 594076643672515,
+									"parameters": {
+										"first-value": "LayoutName",
+										"comparison": 0,
+										"second-value": "\"Number-\"&LettersArray.At(CurrentLetterIndex)"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 193432015218923,
+									"parameters": {
+										"variable": "CanStartTimer",
+										"value": "false"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 556352480254184,
+									"parameters": {
+										"variable": "TimeLapsed",
+										"value": "0"
+									}
+								},
+								{
+									"id": "wait",
+									"objectClass": "System",
+									"sid": 988523942563388,
+									"disabled": true,
+									"parameters": {
+										"seconds": "0.22"
+									}
+								},
+								{
+									"id": "set-boolean-instvar",
+									"objectClass": "HomeButton",
+									"sid": 124787152788451,
+									"parameters": {
+										"instance-variable": "Touch",
+										"value": "true"
+									}
+								},
+								{
+									"callFunction": "ExitFromGame",
+									"sid": 705716350528724,
+									"parameters": [
+										"\"EventName=\"&EventNames.Get(\"299\")&\"&SubjectSubType=\"&TracingType"
+									]
+								},
+								{
+									"id": "set-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 802630679580872,
+									"parameters": {
+										"variable": "CanStartTimer",
+										"value": "false"
+									}
+								}
+							],
+							"sid": 523602116487267
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 767436594263864
+								}
+							],
+							"actions": [],
+							"sid": 457362301372625,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 714008482157741,
+											"parameters": {
+												"first-value": "find(LayoutName, \"Small-\")",
+												"comparison": 1,
+												"second-value": "-1"
+											}
+										},
+										{
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 711605891264456,
+											"parameters": {
+												"first-value": "find(LayoutName, \"Capital-\")",
+												"comparison": 1,
+												"second-value": "-1"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-boolean-instvar",
+											"objectClass": "HomeButton",
+											"sid": 997457839325011,
+											"parameters": {
+												"instance-variable": "Touch",
+												"value": "true"
+											}
+										},
+										{
+											"callFunction": "ExitFromGame",
+											"sid": 571009881826388,
+											"parameters": [
+												"\"EventName=\"&EventNames.Get(\"298\")&\"&SubjectSubType=\"&TracingType"
+											]
+										}
+									],
+									"sid": 539687706393483,
+									"isOrBlock": true
+								}
+							]
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-touched-object",
+							"objectClass": "Touch",
+							"sid": 260435102318121,
+							"parameters": {
+								"object": "BackButton"
+							}
+						},
+						{
+							"id": "is-boolean-instance-variable-set",
+							"objectClass": "BackButton",
+							"sid": 403173295753724,
+							"parameters": {
+								"instance-variable": "Touch"
+							}
+						},
+						{
+							"id": "is-playing",
+							"objectClass": "BackBtnIcons",
+							"sid": 837729763209277,
+							"behaviorType": "Tween",
+							"parameters": {
+								"tags": "\"bounce-home\""
+							},
+							"isInverted": true
+						}
+					],
+					"actions": [
+						{
+							"id": "set-boolean-instvar",
+							"objectClass": "BackButton",
+							"sid": 376396209391828,
+							"parameters": {
+								"instance-variable": "Touch",
+								"value": "false"
+							}
+						},
+						{
+							"id": "start-animation",
+							"objectClass": "BackBtnIcons",
+							"sid": 694631246958634,
+							"disabled": true,
+							"parameters": {
+								"from": "current-frame"
+							}
+						},
+						{
+							"id": "play-by-name",
+							"objectClass": "Audio",
+							"sid": 157267333130312,
+							"parameters": {
+								"folder": "sounds",
+								"audio-file-name": "\"Button_pressed\"",
+								"loop": "not-looping",
+								"volume": "0",
+								"stereo-pan": "0",
+								"tag-optional": "\"Button_pressed\""
+							}
+						},
+						{
+							"id": "tween-two-properties",
+							"objectClass": "BackBtnIcons",
+							"sid": 734987309675403,
+							"behaviorType": "Tween",
+							"parameters": {
+								"tags": "\"bounce-home\"",
+								"property": "size",
+								"end-x": "47",
+								"end-y": "47",
+								"time": "0.3",
+								"ease": "easeinbounce",
+								"destroy-on-complete": "no",
+								"loop": "no",
+								"ping-pong": "yes"
+							}
+						},
+						{
+							"id": "wait-for-previous-actions",
+							"objectClass": "System",
+							"sid": 545518407320691
+						}
+					],
+					"sid": 945555822450577,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "targetLayout",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 836062309975546
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 735020598611899,
+									"parameters": {
+										"first-value": "find(LayoutName,\"Alphabet Selection\")",
+										"comparison": 1,
+										"second-value": "-1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"callFunction": "DestroyTracingObjectsATEnd",
+									"sid": 340662558122211
+								},
+								{
+									"callFunction": "SendAnalytics",
+									"sid": 621924524976116,
+									"parameters": [
+										"\"EventName=\"&EventNames.Get(\"292\")&\"&SubjectSubType=\"&TracingType"
+									]
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 105159519029850,
+									"parameters": {
+										"variable": "targetLayout",
+										"value": "\"Home\""
+									}
+								}
+							],
+							"sid": 826996388129134,
+							"isOrBlock": true
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 870834354418642
+								},
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 741788712513147,
+									"parameters": {
+										"first-value": "LayoutName",
+										"comparison": 0,
+										"second-value": "\"Number Selection\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"callFunction": "DestroyTracingObjectsATEnd",
+									"sid": 428892459288013
+								},
+								{
+									"callFunction": "SendAnalytics",
+									"sid": 588111027445929,
+									"parameters": [
+										"\"EventName=\"&EventNames.Get(\"294\")&\"&SubjectSubType=\"&TracingType"
+									]
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 763812550716349,
+									"parameters": {
+										"variable": "targetLayout",
+										"value": "\"Home\""
+									}
+								}
+							],
+							"sid": 862161381227054
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 806738499699899
+								},
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 230155469520667,
+									"parameters": {
+										"first-value": "LayoutName",
+										"comparison": 0,
+										"second-value": "\"Number-\"&LettersArray.At(CurrentLetterIndex)"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 820598531787169,
+									"parameters": {
+										"variable": "CanStartTimer",
+										"value": "false"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 493160920411499,
+									"parameters": {
+										"variable": "TimeLapsed",
+										"value": "0"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 439054080716383,
+									"parameters": {
+										"variable": "targetLayout",
+										"value": "\"Number Selection\""
+									}
+								},
+								{
+									"callFunction": "SendAnalytics",
+									"sid": 413017796482034,
+									"parameters": [
+										"\"EventName=\"&EventNames.Get(\"301\")&\"&SubjectSubType=\"&TracingType"
+									]
+								}
+							],
+							"sid": 668249776337825
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 465346698873562
+								}
+							],
+							"actions": [],
+							"sid": 136474505268342,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 663645347623561,
+											"parameters": {
+												"first-value": "find(LayoutName, \"Small-\")",
+												"comparison": 1,
+												"second-value": "-1"
+											}
+										},
+										{
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 879026788277079,
+											"parameters": {
+												"first-value": "find(LayoutName, \"Capital-\")",
+												"comparison": 1,
+												"second-value": "-1"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-boolean-eventvar",
+											"objectClass": "System",
+											"sid": 154346744980913,
+											"parameters": {
+												"variable": "CanStartTimer",
+												"value": "false"
+											}
+										},
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 633394686795816,
+											"parameters": {
+												"variable": "TimeLapsed",
+												"value": "0"
+											}
+										},
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 878515681076641,
+											"parameters": {
+												"variable": "targetLayout",
+												"value": "\"Alphabet Selection \"&(find(LayoutName, \"Small-\")<>-1?\"Small\":\"Capital\")"
+											}
+										},
+										{
+											"callFunction": "SendAnalytics",
+											"sid": 454850296694078,
+											"parameters": [
+												"\"EventName=\"&EventNames.Get(\"300\")&\"&SubjectSubType=\"&TracingType"
+											]
+										}
+									],
+									"sid": 511121521121717,
+									"isOrBlock": true
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "log",
+									"objectClass": "Browser",
+									"sid": 969972481374450,
+									"parameters": {
+										"type": "log",
+										"message": "\"back: \"&\": \"&LayoutName&\": \"&targetLayout"
+									}
+								},
+								{
+									"id": "set-boolean-instvar",
+									"objectClass": "BackButton",
+									"sid": 208356081534348,
+									"parameters": {
+										"instance-variable": "Touch",
+										"value": "true"
+									}
+								},
+								{
+									"id": "stop-all",
+									"objectClass": "Audio",
+									"sid": 703707392868502
+								},
+								{
+									"id": "go-to-layout-by-name",
+									"objectClass": "System",
+									"sid": 520540962218923,
+									"parameters": {
+										"layout": "targetLayout"
+									}
+								}
+							],
+							"sid": 451820607855062
+						}
+					]
+				}
+			],
+			"sid": 387036025779665
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "Common Functions",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"functionName": "GetAngleOfMouth",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "number",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "letter",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 118177207768602
+						},
+						{
+							"name": "current_frame",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 105128355569688
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [
+						{
+							"type": "script",
+							"script": "\nlet returnValue = 0 ;\n\nif(localVars.letter.length == 2 && localVars.current_frame == 1){\n\tlocalVars.letter = localVars.letter.charAt(localVars.letter.length - 1);\n}\n// console.log(\"LETTER ::::\"+localVars.letter)\nswitch(localVars.letter)\n{\n\tcase \"3\":\n\treturnValue = -25;\n\tbreak\n\n\tcase \"5\":\n\treturnValue = 32;\n\tbreak\t\n\t\n\n\tcase \"6\":\n\treturnValue = 30;\n\tbreak\n\n\n\tcase \"9\":\n\treturnValue = -25;\n\tbreak\n\t\n\t\n\t\n\tdefault:\n\treturnValue = 0;\n}\nconsole.log(\"LETTER ::::\"+localVars.letter+\", Angle:\"+returnValue)\nruntime.setReturnValue(returnValue);"
+						}
+					],
+					"sid": 562118350472628
+				},
+				{
+					"functionName": "SetEyesAndMouth",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": true,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "scale_eye",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 184685265624373
+						},
+						{
+							"name": "scale_mouth",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 260759176652408
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 531047020934980,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-animation-frame",
+									"objectClass": "OriginalLetters",
+									"sid": 354041841196989,
+									"parameters": {
+										"comparison": 0,
+										"number": "0"
+									}
+								},
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "LetterMouth",
+									"sid": 203075863421749,
+									"parameters": {
+										"instance-variable": "Index",
+										"comparison": 0,
+										"value": "1"
+									}
+								},
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "LetterEyes",
+									"sid": 332648072379571,
+									"parameters": {
+										"instance-variable": "Index",
+										"comparison": 0,
+										"value": "1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-position-to-another-object",
+									"objectClass": "LetterEyes",
+									"sid": 765670539744386,
+									"parameters": {
+										"object": "OriginalLetters",
+										"image-point-optional": "1"
+									}
+								},
+								{
+									"id": "set-scale",
+									"objectClass": "LetterEyes",
+									"sid": 454979606262065,
+									"parameters": {
+										"scale": "scale_eye"
+									}
+								},
+								{
+									"id": "add-child",
+									"objectClass": "OriginalLetters",
+									"sid": 582814695682448,
+									"parameters": {
+										"child": "LetterEyes",
+										"transform-x": true,
+										"transform-y": true,
+										"transform-w": true,
+										"transform-h": true,
+										"transform-a": true,
+										"transform-z-elevation": true,
+										"destroy-with-parent": true
+									}
+								},
+								{
+									"id": "set-position-to-another-object",
+									"objectClass": "LetterMouth",
+									"sid": 303181064889259,
+									"parameters": {
+										"object": "OriginalLetters",
+										"image-point-optional": "2"
+									}
+								},
+								{
+									"id": "set-scale",
+									"objectClass": "LetterMouth",
+									"sid": 431568887912087,
+									"parameters": {
+										"scale": "scale_mouth"
+									}
+								},
+								{
+									"id": "set-angle",
+									"objectClass": "LetterMouth",
+									"sid": 428400071676544,
+									"parameters": {
+										"angle": "Functions.GetAngleOfMouth(OriginalLetters.Letter, OriginalLetters.AnimationFrame)"
+									}
+								},
+								{
+									"id": "add-child",
+									"objectClass": "OriginalLetters",
+									"sid": 583405945736873,
+									"parameters": {
+										"child": "LetterMouth",
+										"transform-x": true,
+										"transform-y": true,
+										"transform-w": true,
+										"transform-h": true,
+										"transform-a": true,
+										"transform-z-elevation": true,
+										"destroy-with-parent": true
+									}
+								}
+							],
+							"sid": 143586609096457
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-animation-frame",
+									"objectClass": "OriginalLetters",
+									"sid": 694526699295262,
+									"parameters": {
+										"comparison": 0,
+										"number": "1"
+									}
+								},
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "LetterMouth",
+									"sid": 301529575875299,
+									"parameters": {
+										"instance-variable": "Index",
+										"comparison": 0,
+										"value": "2"
+									}
+								},
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "LetterEyes",
+									"sid": 315386075942782,
+									"parameters": {
+										"instance-variable": "Index",
+										"comparison": 0,
+										"value": "2"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-position-to-another-object",
+									"objectClass": "LetterEyes",
+									"sid": 648083480610781,
+									"parameters": {
+										"object": "OriginalLetters",
+										"image-point-optional": "1"
+									}
+								},
+								{
+									"id": "set-scale",
+									"objectClass": "LetterEyes",
+									"sid": 457227389594742,
+									"parameters": {
+										"scale": "CurrentLetterJSon.Get(\"currentLetter.letter\")=\"20\"? 0.5:0.45"
+									}
+								},
+								{
+									"id": "add-child",
+									"objectClass": "OriginalLetters",
+									"sid": 511707451767889,
+									"parameters": {
+										"child": "LetterEyes",
+										"transform-x": true,
+										"transform-y": true,
+										"transform-w": true,
+										"transform-h": true,
+										"transform-a": true,
+										"transform-z-elevation": true,
+										"destroy-with-parent": true
+									}
+								},
+								{
+									"id": "set-position-to-another-object",
+									"objectClass": "LetterMouth",
+									"sid": 113017835899021,
+									"parameters": {
+										"object": "OriginalLetters",
+										"image-point-optional": "2"
+									}
+								},
+								{
+									"id": "set-scale",
+									"objectClass": "LetterMouth",
+									"sid": 153882907589346,
+									"parameters": {
+										"scale": "CurrentLetterJSon.Get(\"currentLetter.letter\")=\"20\"? 0.38:0.4"
+									}
+								},
+								{
+									"id": "set-angle",
+									"objectClass": "LetterMouth",
+									"sid": 742827117245712,
+									"parameters": {
+										"angle": "Functions.GetAngleOfMouth(OriginalLetters.Letter, OriginalLetters.AnimationFrame)"
+									}
+								},
+								{
+									"id": "add-child",
+									"objectClass": "OriginalLetters",
+									"sid": 663372081439746,
+									"parameters": {
+										"child": "LetterMouth",
+										"transform-x": true,
+										"transform-y": true,
+										"transform-w": true,
+										"transform-h": true,
+										"transform-a": true,
+										"transform-z-elevation": true,
+										"destroy-with-parent": true
+									}
+								}
+							],
+							"sid": 840292927292789
+						}
+					]
+				},
+				{
+					"functionName": "CountTens",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "number",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "num",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 537379713477953
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 831756455615622,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "tens",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 748216226300327
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "while",
+									"objectClass": "System",
+									"sid": 660006865094521
+								},
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 592445144315768,
+									"parameters": {
+										"variable": "num",
+										"comparison": 1,
+										"value": "0"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 738656124995387,
+									"parameters": {
+										"variable": "num",
+										"value": "int(num/10)"
+									}
+								},
+								{
+									"id": "add-to-eventvar",
+									"objectClass": "System",
+									"sid": 515276636454936,
+									"parameters": {
+										"variable": "tens",
+										"value": "1"
+									}
+								}
+							],
+							"sid": 790428731642858
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-function-return-value",
+									"objectClass": "Functions",
+									"sid": 401221148723696,
+									"parameters": {
+										"value": "tens-1"
+									}
+								}
+							],
+							"sid": 443851478896402
+						}
+					]
+				},
+				{
+					"functionName": "ShowLockSubscription",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "activate",
+							"type": "boolean",
+							"initialValue": "false",
+							"comment": "",
+							"sid": 644859013862672
+						},
+						{
+							"name": "letter",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 214461712475308
+						},
+						{
+							"name": "subtype",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 528338580780267
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 766463181657503,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 112446735409130,
+									"parameters": {
+										"variable": "activate"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-instvar-value",
+									"objectClass": "DialogSubs",
+									"sid": 210667428849675,
+									"parameters": {
+										"instance-variable": "Letter",
+										"value": "letter"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "DialogSubs",
+									"sid": 499217123970837,
+									"parameters": {
+										"instance-variable": "type",
+										"value": "subtype"
+									}
+								},
+								{
+									"id": "set-layer-visible",
+									"objectClass": "System",
+									"sid": 825827739636856,
+									"parameters": {
+										"layer": "\"Dialogs\"",
+										"visibility": "visible"
+									}
+								},
+								{
+									"id": "set-scale",
+									"objectClass": "DialogSubs",
+									"sid": 437911409721541,
+									"parameters": {
+										"scale": "0.01"
+									}
+								},
+								{
+									"id": "set-enabled",
+									"objectClass": "S2_Room_List_Panel",
+									"sid": 890248986497836,
+									"behaviorType": "DragDrop",
+									"parameters": {
+										"state": "disabled"
+									}
+								},
+								{
+									"id": "set-group-active",
+									"objectClass": "System",
+									"sid": 762648797764141,
+									"parameters": {
+										"group-name": "\"Letter Selection Events\"",
+										"state": "deactivated"
+									}
+								},
+								{
+									"id": "set-group-active",
+									"objectClass": "System",
+									"sid": 947278722287475,
+									"parameters": {
+										"group-name": "\"Small Letter Selection Events\"",
+										"state": "deactivated"
+									}
+								},
+								{
+									"id": "set-group-active",
+									"objectClass": "System",
+									"sid": 870989594453831,
+									"parameters": {
+										"group-name": "\"Number Selection Events\"",
+										"state": "deactivated"
+									}
+								},
+								{
+									"id": "set-group-active",
+									"objectClass": "System",
+									"sid": 948269375669742,
+									"parameters": {
+										"group-name": "\"HUD\"",
+										"state": "deactivated"
+									}
+								},
+								{
+									"id": "tween-two-properties",
+									"objectClass": "DialogSubs",
+									"sid": 267022971468121,
+									"behaviorType": "Tween",
+									"parameters": {
+										"tags": "\"\"",
+										"property": "scale",
+										"end-x": "1",
+										"end-y": "1",
+										"time": "0.2",
+										"ease": "default",
+										"destroy-on-complete": "no",
+										"loop": "no",
+										"ping-pong": "no"
+									}
+								},
+								{
+									"id": "wait-for-previous-actions",
+									"objectClass": "System",
+									"sid": 664349942916257
+								},
+								{
+									"callFunction": "SendAnalytics",
+									"sid": 131995112710697,
+									"parameters": [
+										"\"toddler_sel_char=\"&letter&\"&toddler_subtype=\"&subtype&\"&EventName=\"&EventNames.Get(\"304\")"
+									]
+								},
+								{
+									"id": "stop",
+									"objectClass": "Audio",
+									"sid": 646677632866103,
+									"parameters": {
+										"tag": "\"get_a_grownup\""
+									}
+								},
+								{
+									"id": "play-by-name",
+									"objectClass": "Audio",
+									"sid": 664888121569273,
+									"parameters": {
+										"folder": "sounds",
+										"audio-file-name": "\"get_a_grownup_\"&country_lang_code",
+										"loop": "not-looping",
+										"volume": "0",
+										"stereo-pan": "0",
+										"tag-optional": "\"get_a_grownup\""
+									}
+								},
+								{
+									"id": "set-group-active",
+									"objectClass": "System",
+									"sid": 789280285387642,
+									"parameters": {
+										"group-name": "\"Dialogs Events\"",
+										"state": "activated"
+									}
+								}
+							],
+							"sid": 665855540479144
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 953117547740420
+								}
+							],
+							"actions": [
+								{
+									"callFunction": "CallUnityAction",
+									"sid": 644050460991777,
+									"parameters": [
+										"\"EventName=\"&EventNames.Get(\"305\")"
+									]
+								},
+								{
+									"id": "set-enabled",
+									"objectClass": "S2_Room_List_Panel",
+									"sid": 386775518006199,
+									"behaviorType": "DragDrop",
+									"parameters": {
+										"state": "enabled"
+									}
+								},
+								{
+									"id": "tween-two-properties",
+									"objectClass": "DialogSubs",
+									"sid": 198102107460182,
+									"behaviorType": "Tween",
+									"parameters": {
+										"tags": "\"\"",
+										"property": "scale",
+										"end-x": "0.01",
+										"end-y": "0.01",
+										"time": "0.2",
+										"ease": "default",
+										"destroy-on-complete": "no",
+										"loop": "no",
+										"ping-pong": "no"
+									}
+								},
+								{
+									"id": "wait-for-previous-actions",
+									"objectClass": "System",
+									"sid": 571249485209740
+								},
+								{
+									"id": "set-layer-visible",
+									"objectClass": "System",
+									"sid": 800097364434534,
+									"parameters": {
+										"layer": "\"Dialogs\"",
+										"visibility": "invisible"
+									}
+								},
+								{
+									"id": "set-group-active",
+									"objectClass": "System",
+									"sid": 945043920180457,
+									"parameters": {
+										"group-name": "\"Letter Selection Events\"",
+										"state": "activated"
+									}
+								},
+								{
+									"id": "set-group-active",
+									"objectClass": "System",
+									"sid": 735027600332475,
+									"parameters": {
+										"group-name": "\"Small Letter Selection Events\"",
+										"state": "activated"
+									}
+								},
+								{
+									"id": "set-group-active",
+									"objectClass": "System",
+									"sid": 446193707240443,
+									"parameters": {
+										"group-name": "\"Number Selection Events\"",
+										"state": "activated"
+									}
+								},
+								{
+									"id": "set-group-active",
+									"objectClass": "System",
+									"sid": 817681320837840,
+									"parameters": {
+										"group-name": "\"Dialogs Events\"",
+										"state": "deactivated"
+									}
+								},
+								{
+									"id": "set-group-active",
+									"objectClass": "System",
+									"sid": 395632210456360,
+									"parameters": {
+										"group-name": "\"HUD\"",
+										"state": "activated"
+									}
+								},
+								{
+									"id": "wait",
+									"objectClass": "System",
+									"sid": 208363183393944,
+									"parameters": {
+										"seconds": "0.001"
+									}
+								},
+								{
+									"id": "set-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 381154220345753,
+									"parameters": {
+										"variable": "EXIT_FROM_WEBVIEW",
+										"value": "true"
+									}
+								},
+								{
+									"id": "go-to-layout",
+									"objectClass": "System",
+									"sid": 106792656269619,
+									"parameters": {
+										"layout": "Home"
+									}
+								}
+							],
+							"sid": 536257592306712
+						}
+					]
+				},
+				{
+					"functionName": "SetSubscriptionDialogTexts",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "header",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 340593637807770
+						},
+						{
+							"name": "body",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 863674397421649
+						},
+						{
+							"name": "footer",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 800692529333116
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 864658654734311,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 484531174275600,
+									"parameters": {
+										"variable": "SubscriptionDialogHeader",
+										"value": "header"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 790559896288596,
+									"parameters": {
+										"variable": "SubscriptionDialogBody",
+										"value": "body"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 715520445176418,
+									"parameters": {
+										"variable": "SubscriptionDialogFooter",
+										"value": "footer"
+									}
+								},
+								{
+									"id": "set-text",
+									"objectClass": "TextSubscribeDialogTitle",
+									"sid": 845323166081776,
+									"parameters": {
+										"text": "SubscriptionDialogHeader"
+									}
+								},
+								{
+									"id": "set-text",
+									"objectClass": "TextDialogBody",
+									"sid": 602955024746333,
+									"parameters": {
+										"text": "SubscriptionDialogBody"
+									}
+								},
+								{
+									"id": "set-text",
+									"objectClass": "TextBtnSubscribeOK",
+									"sid": 537554553102017,
+									"parameters": {
+										"text": "SubscriptionDialogFooter"
+									}
+								}
+							],
+							"sid": 508889987112334
+						}
+					]
+				},
+				{
+					"functionName": "SetBodyHTMLColor",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "name",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 568197562853608
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [
+						{
+							"type": "script",
+							"script": "\n\nlet colorRGB = new Map();\ncolorRGB.set(\"Loader\", \"rgb(133, 233, 216)\");\ncolorRGB.set(\"Home\", \"rgb(133, 233, 216)\");\n\ncolorRGB.set(\"Tracing\", \"rgb(0, 198, 163)\");\ncolorRGB.set(\"Alphabet Selection\", \"rgb(0, 198, 163)\");\ncolorRGB.set(\"Number Selection\", \"rgb(0, 198, 163)\");\n\n\nlet color = colorRGB.get(localVars.name);\nconsole.log(\"SET COLOR:====> \", color)\ndocument.body.style.backgroundColor = color;\ndocument.getElementsByTagName(\"html\")[0].style.background =  color;"
+						}
+					],
+					"sid": 549966642110826
+				}
+			],
+			"sid": 188909256934201
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 225838598816574
+				}
+			],
+			"actions": [
+				{
+					"callFunction": "StopTracingScreenSounds",
+					"sid": 782067607784752
+				}
+			],
+			"sid": 653383140798504,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-tag-playing",
+							"objectClass": "Audio",
+							"sid": 116206169775010,
+							"parameters": {
+								"tag": "\"get_a_grownup\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "stop",
+							"objectClass": "Audio",
+							"sid": 498401218844190,
+							"parameters": {
+								"tag": "\"get_a_grownup\""
+							}
+						}
+					],
+					"sid": 903943701210144
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-end-of-layout",
+					"objectClass": "System",
+					"sid": 398082895464029
+				}
+			],
+			"actions": [
+				{
+					"id": "stop-all",
+					"objectClass": "Audio",
+					"sid": 992912497034062
+				}
+			],
+			"sid": 813421454253339
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-suspend",
+					"objectClass": "System",
+					"sid": 217483855652965
+				}
+			],
+			"actions": [
+				{
+					"id": "log",
+					"objectClass": "Browser",
+					"sid": 887726443374078,
+					"parameters": {
+						"type": "log",
+						"message": "\"SUSPENDED\n!!!!!!!!!!!!!\""
+					}
+				}
+			],
+			"sid": 372705198063614
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-resume",
+					"objectClass": "System",
+					"sid": 945368093288597
+				}
+			],
+			"actions": [
+				{
+					"id": "log",
+					"objectClass": "Browser",
+					"sid": 155077111536370,
+					"parameters": {
+						"type": "log",
+						"message": "\"RESUMED!!!!!!!!!!!!!\""
+					}
+				},
+				{
+					"type": "script",
+					"script": " let jsonData = runtime.objects.JsonEntryData.getFirstInstance().getJsonDataCopy();\n localStorage.setItem(\"tracing-data\", JSON.stringify(jsonData));\nconsole.log(runtime.objects.JsonEntryData.getFirstInstance().getJsonDataCopy());\nwindow.location.reload();",
+					"disabled": true
+				}
+			],
+			"sid": 923883234968370
+		}
+	],
+	"sid": 261339869763387
+}

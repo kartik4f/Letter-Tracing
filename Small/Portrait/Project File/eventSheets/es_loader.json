@@ -1,0 +1,382 @@
+{
+	"name": "es_Loader",
+	"events": [
+		{
+			"eventType": "variable",
+			"name": "isLoading",
+			"type": "boolean",
+			"initialValue": "false",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 515153165282152
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 508613850883262
+				}
+			],
+			"actions": [
+				{
+					"id": "set-boolean-eventvar",
+					"objectClass": "System",
+					"sid": 392071216450778,
+					"parameters": {
+						"variable": "isLoading",
+						"value": "true"
+					}
+				},
+				{
+					"id": "set-width",
+					"objectClass": "ProgressBar",
+					"sid": 809081648606959,
+					"parameters": {
+						"width": "0"
+					}
+				},
+				{
+					"id": "parse",
+					"objectClass": "JsonEntryData",
+					"sid": 586772193456710,
+					"parameters": {
+						"data": "JsonDataStr"
+					}
+				},
+				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 401922096919825,
+					"parameters": {
+						"variable": "country_lang_code",
+						"value": "JsonEntryData.Get(\".LangCode\") = \"en_au\" ?\"en_gb\":JsonEntryData.Get(\".LangCode\") = \"es_mx\" ?\"es\":JsonEntryData.Get(\".LangCode\")"
+					}
+				},
+				{
+					"callFunction": "SetBodyHTMLColor",
+					"sid": 838683929484439,
+					"parameters": [
+						"LayoutName"
+					]
+				}
+			],
+			"sid": 984709992082737
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "compare-boolean-eventvar",
+					"objectClass": "System",
+					"sid": 752762122213939,
+					"parameters": {
+						"variable": "isLoading"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-width",
+					"objectClass": "ProgressBar",
+					"sid": 348079543527461,
+					"parameters": {
+						"width": "loadingprogress>0?emptybar.Width*loadingprogress:0.01"
+					}
+				}
+			],
+			"sid": 805180574408353
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-loader-layout-complete",
+					"objectClass": "System",
+					"sid": 360940610479985
+				}
+			],
+			"actions": [
+				{
+					"id": "set-boolean-eventvar",
+					"objectClass": "System",
+					"sid": 983750771767329,
+					"parameters": {
+						"variable": "isLoading",
+						"value": "false"
+					}
+				},
+				{
+					"id": "log",
+					"objectClass": "Browser",
+					"sid": 643515968565723,
+					"parameters": {
+						"type": "log",
+						"message": "\"Images and scripts loaded\""
+					}
+				},
+				{
+					"callFunction": "LoadSounds",
+					"sid": 940200021261049
+				}
+			],
+			"sid": 384675483796523
+		},
+		{
+			"functionName": "LoadSounds",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "log",
+					"objectClass": "Browser",
+					"sid": 983945854420177,
+					"parameters": {
+						"type": "log",
+						"message": "\"*****LOADING AUDIOS ONLY FOR THE CHOSEN LANGUAGE\""
+					}
+				},
+				{
+					"id": "preload-by-name",
+					"objectClass": "Audio",
+					"sid": 570779693940199,
+					"parameters": {
+						"folder": "sounds",
+						"audio-file-name": "\"get_a_grownup_\"&country_lang_code"
+					}
+				},
+				{
+					"id": "preload-by-name",
+					"objectClass": "Audio",
+					"sid": 848887925245468,
+					"parameters": {
+						"folder": "sounds",
+						"audio-file-name": "\"bug walking\""
+					}
+				},
+				{
+					"id": "preload-by-name",
+					"objectClass": "Audio",
+					"sid": 304153936531782,
+					"parameters": {
+						"folder": "sounds",
+						"audio-file-name": "\"completed\""
+					}
+				},
+				{
+					"id": "preload-by-name",
+					"objectClass": "Audio",
+					"sid": 975543010523688,
+					"parameters": {
+						"folder": "sounds",
+						"audio-file-name": "\"correct\""
+					}
+				},
+				{
+					"id": "preload-by-name",
+					"objectClass": "Audio",
+					"sid": 463595003279451,
+					"parameters": {
+						"folder": "sounds",
+						"audio-file-name": "\"Button_pressed\""
+					}
+				},
+				{
+					"id": "preload-by-name",
+					"objectClass": "Audio",
+					"sid": 254046276918647,
+					"parameters": {
+						"folder": "sounds",
+						"audio-file-name": "\"Neta_Intro_SHORT\""
+					}
+				}
+			],
+			"sid": 114794037798341,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for-each",
+							"objectClass": "JsonEntryData",
+							"sid": 618453389429690,
+							"parameters": {
+								"path": "\"GameData.0.Played\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "log",
+							"objectClass": "Browser",
+							"sid": 458283663368698,
+							"parameters": {
+								"type": "log",
+								"message": "JsonEntryData.Get(\"GameData.0.Played.\"&JsonEntryData.CurrentKey&\".mainAudioClip\")&\"_\"&country_lang_code"
+							}
+						},
+						{
+							"id": "log",
+							"objectClass": "Browser",
+							"sid": 613260082824465,
+							"parameters": {
+								"type": "log",
+								"message": "JsonEntryData.Get(\"GameData.0.Played.\"&JsonEntryData.CurrentKey&\".phoneticClip\")&\"_\"&country_lang_code"
+							}
+						},
+						{
+							"id": "log",
+							"objectClass": "Browser",
+							"sid": 184036653106670,
+							"parameters": {
+								"type": "log",
+								"message": "JsonEntryData.Get(\"GameData.0.Played.\"&JsonEntryData.CurrentKey&\".letterObjClip\")&\"_\"&country_lang_code"
+							}
+						},
+						{
+							"id": "preload-by-name",
+							"objectClass": "Audio",
+							"sid": 793151040982885,
+							"parameters": {
+								"folder": "sounds",
+								"audio-file-name": "JsonEntryData.Get(\"GameData.0.Played.\"&JsonEntryData.CurrentKey&\".mainAudioClip\")&\"_\"&country_lang_code"
+							}
+						},
+						{
+							"id": "preload-by-name",
+							"objectClass": "Audio",
+							"sid": 444661083710164,
+							"parameters": {
+								"folder": "sounds",
+								"audio-file-name": "JsonEntryData.Get(\"GameData.0.Played.\"&JsonEntryData.CurrentKey&\".phoneticClip\")&\"_\"&country_lang_code"
+							}
+						},
+						{
+							"id": "preload-by-name",
+							"objectClass": "Audio",
+							"sid": 521521829554745,
+							"parameters": {
+								"folder": "sounds",
+								"audio-file-name": "JsonEntryData.Get(\"GameData.0.Played.\"&JsonEntryData.CurrentKey&\".letterObjClip\")&\"_\"&country_lang_code"
+							}
+						}
+					],
+					"sid": 563976381739569
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for-each",
+							"objectClass": "JsonEntryData",
+							"sid": 236350843352491,
+							"parameters": {
+								"path": "\"GameData.1.Played\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "log",
+							"objectClass": "Browser",
+							"sid": 556554610130860,
+							"parameters": {
+								"type": "log",
+								"message": "JsonEntryData.Get(\"GameData.1.Played.\"&JsonEntryData.CurrentKey&\".mainAudioClip\")&\"_\"&country_lang_code"
+							}
+						},
+						{
+							"id": "log",
+							"objectClass": "Browser",
+							"sid": 426723773232712,
+							"parameters": {
+								"type": "log",
+								"message": "(\"Number_count_\" & Functions.getCountNumber(int(JsonEntryData.CurrentKey)) & \"_\") & country_lang_code"
+							}
+						},
+						{
+							"id": "preload-by-name",
+							"objectClass": "Audio",
+							"sid": 715559827468323,
+							"parameters": {
+								"folder": "sounds",
+								"audio-file-name": "JsonEntryData.Get(\"GameData.1.Played.\"&JsonEntryData.CurrentKey&\".mainAudioClip\")&\"_\"&country_lang_code"
+							}
+						},
+						{
+							"id": "preload-by-name",
+							"objectClass": "Audio",
+							"sid": 614078345793708,
+							"parameters": {
+								"folder": "sounds",
+								"audio-file-name": "(\"Number_count_\" & Functions.getCountNumber(int(JsonEntryData.CurrentKey)) & \"_\") & country_lang_code"
+							}
+						}
+					],
+					"sid": 867506482440845
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "preloads-complete",
+					"objectClass": "Audio",
+					"sid": 428827165297872
+				},
+				{
+					"id": "compare-boolean-eventvar",
+					"objectClass": "System",
+					"sid": 431205205495317,
+					"parameters": {
+						"variable": "isLoading"
+					},
+					"isInverted": true
+				},
+				{
+					"id": "trigger-once-while-true",
+					"objectClass": "System",
+					"sid": 122420463333269
+				}
+			],
+			"actions": [
+				{
+					"id": "log",
+					"objectClass": "Browser",
+					"sid": 148366964318456,
+					"parameters": {
+						"type": "log",
+						"message": "\"*****ALL SOUNDS LOADED FOR THE CHOSEN LANGUAGE\""
+					}
+				},
+				{
+					"id": "set-width",
+					"objectClass": "ProgressBar",
+					"sid": 428586906898140,
+					"parameters": {
+						"width": "emptybar.Width"
+					}
+				},
+				{
+					"id": "go-to-layout",
+					"objectClass": "System",
+					"sid": 936409913605090,
+					"parameters": {
+						"layout": "Home"
+					}
+				}
+			],
+			"sid": 791567900445148
+		}
+	],
+	"sid": 331486482786701
+}

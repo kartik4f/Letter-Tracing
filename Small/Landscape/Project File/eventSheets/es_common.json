@@ -1,0 +1,2182 @@
+{
+	"name": "es_Common",
+	"events": [
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "HUD",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-touched-object",
+							"objectClass": "Touch",
+							"sid": 817619745667750,
+							"parameters": {
+								"object": "HomeButton"
+							}
+						},
+						{
+							"id": "is-boolean-instance-variable-set",
+							"objectClass": "HomeButton",
+							"sid": 128498836136855,
+							"parameters": {
+								"instance-variable": "Touch"
+							}
+						},
+						{
+							"id": "is-playing",
+							"objectClass": "HomeBtnIcons",
+							"sid": 967948595085432,
+							"behaviorType": "Tween",
+							"parameters": {
+								"tags": "\"bounce-home\""
+							},
+							"isInverted": true
+						}
+					],
+					"actions": [
+						{
+							"id": "set-boolean-instvar",
+							"objectClass": "HomeButton",
+							"sid": 717428834267316,
+							"parameters": {
+								"instance-variable": "Touch",
+								"value": "false"
+							}
+						},
+						{
+							"id": "play-by-name",
+							"objectClass": "Audio",
+							"sid": 215509530812006,
+							"parameters": {
+								"folder": "sounds",
+								"audio-file-name": "\"Button_pressed\"",
+								"loop": "not-looping",
+								"volume": "0",
+								"stereo-pan": "0",
+								"tag-optional": "\"Button_pressed\""
+							}
+						},
+						{
+							"id": "tween-two-properties",
+							"objectClass": "HomeBtnIcons",
+							"sid": 291952427868226,
+							"behaviorType": "Tween",
+							"parameters": {
+								"tags": "\"bounce-home\"",
+								"property": "size",
+								"end-x": "47",
+								"end-y": "47",
+								"time": "0.3",
+								"ease": "easeinbounce",
+								"destroy-on-complete": "no",
+								"loop": "no",
+								"ping-pong": "yes"
+							}
+						},
+						{
+							"id": "wait-for-previous-actions",
+							"objectClass": "System",
+							"sid": 918698158753873
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 394974366726448,
+							"parameters": {
+								"variable": "scroll_pos",
+								"value": "0"
+							}
+						}
+					],
+					"sid": 338741958457668,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "targetLayout",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 315850828781386
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 282584433600922,
+									"parameters": {
+										"first-value": "LayoutName",
+										"comparison": 0,
+										"second-value": "\"Home\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "wait",
+									"objectClass": "System",
+									"sid": 302797572259002,
+									"disabled": true,
+									"parameters": {
+										"seconds": "0.22"
+									}
+								},
+								{
+									"id": "set-boolean-instvar",
+									"objectClass": "HomeButton",
+									"sid": 756129347740372,
+									"parameters": {
+										"instance-variable": "Touch",
+										"value": "true"
+									}
+								},
+								{
+									"callFunction": "ExitFromGame",
+									"sid": 947405123654689,
+									"parameters": [
+										"\"EventName=\"&EventNames.Get(\"288\")"
+									]
+								}
+							],
+							"sid": 927333857521661,
+							"isOrBlock": true
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 523278253067324
+								},
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 210273050983746,
+									"parameters": {
+										"first-value": "LayoutName",
+										"comparison": 0,
+										"second-value": "\"Alphabet Selection\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "wait",
+									"objectClass": "System",
+									"sid": 401598967153624,
+									"disabled": true,
+									"parameters": {
+										"seconds": "0.22"
+									}
+								},
+								{
+									"callFunction": "ExitFromGame",
+									"sid": 661407910473517,
+									"parameters": [
+										"\"EventName=\"&EventNames.Get(\"296\")"
+									]
+								}
+							],
+							"sid": 107076073584586
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 782641131527329
+								},
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 164478572788604,
+									"parameters": {
+										"first-value": "LayoutName",
+										"comparison": 0,
+										"second-value": "\"Number Selection\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "wait",
+									"objectClass": "System",
+									"sid": 240687363742345,
+									"disabled": true,
+									"parameters": {
+										"seconds": "0.22"
+									}
+								},
+								{
+									"id": "set-boolean-instvar",
+									"objectClass": "HomeButton",
+									"sid": 325687292080637,
+									"parameters": {
+										"instance-variable": "Touch",
+										"value": "true"
+									}
+								},
+								{
+									"callFunction": "ExitFromGame",
+									"sid": 177752746577476,
+									"parameters": [
+										"\"EventName=\"&EventNames.Get(\"297\")"
+									]
+								}
+							],
+							"sid": 971050323378846
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 730940411633630
+								},
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 386688017592591,
+									"parameters": {
+										"first-value": "LayoutName",
+										"comparison": 0,
+										"second-value": "\"Number-\"&LettersArray.At(CurrentLetterIndex)"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 313263380005784,
+									"parameters": {
+										"variable": "CanStartTimer",
+										"value": "false"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 136772441496106,
+									"parameters": {
+										"variable": "TimeLapsed",
+										"value": "0"
+									}
+								},
+								{
+									"id": "wait",
+									"objectClass": "System",
+									"sid": 203503967099491,
+									"disabled": true,
+									"parameters": {
+										"seconds": "0.22"
+									}
+								},
+								{
+									"id": "set-boolean-instvar",
+									"objectClass": "HomeButton",
+									"sid": 365187415114116,
+									"parameters": {
+										"instance-variable": "Touch",
+										"value": "true"
+									}
+								},
+								{
+									"callFunction": "ExitFromGame",
+									"sid": 781613867346014,
+									"parameters": [
+										"\"EventName=\"&EventNames.Get(\"299\")"
+									]
+								},
+								{
+									"id": "set-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 390768237104536,
+									"parameters": {
+										"variable": "CanStartTimer",
+										"value": "false"
+									}
+								}
+							],
+							"sid": 719966999373815
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 577883646474751
+								},
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 233910341201559,
+									"parameters": {
+										"first-value": "LayoutName",
+										"comparison": 0,
+										"second-value": "\"Small-\"&LettersArray.At(CurrentLetterIndex)"
+									}
+								}
+							],
+							"actions": [
+								{
+									"callFunction": "SendAnalytics",
+									"sid": 606774212779279,
+									"disabled": true,
+									"parameters": [
+										"\"EventName=\"&EventNames.Get(\"298\")"
+									]
+								},
+								{
+									"id": "wait",
+									"objectClass": "System",
+									"sid": 649993213594327,
+									"disabled": true,
+									"parameters": {
+										"seconds": "0.22"
+									}
+								},
+								{
+									"id": "set-boolean-instvar",
+									"objectClass": "HomeButton",
+									"sid": 746554817339504,
+									"parameters": {
+										"instance-variable": "Touch",
+										"value": "true"
+									}
+								},
+								{
+									"callFunction": "ExitFromGame",
+									"sid": 871052247295706,
+									"parameters": [
+										"\"EventName=\"&EventNames.Get(\"298\")"
+									]
+								}
+							],
+							"sid": 204048057069898
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-touched-object",
+							"objectClass": "Touch",
+							"sid": 567643284528179,
+							"parameters": {
+								"object": "BackButton"
+							}
+						},
+						{
+							"id": "is-boolean-instance-variable-set",
+							"objectClass": "BackButton",
+							"sid": 749647265112303,
+							"parameters": {
+								"instance-variable": "Touch"
+							}
+						},
+						{
+							"id": "is-playing",
+							"objectClass": "BackBtnIcons",
+							"sid": 307782098053889,
+							"behaviorType": "Tween",
+							"parameters": {
+								"tags": "\"bounce-home\""
+							},
+							"isInverted": true
+						}
+					],
+					"actions": [
+						{
+							"id": "set-boolean-instvar",
+							"objectClass": "BackButton",
+							"sid": 381451308447777,
+							"parameters": {
+								"instance-variable": "Touch",
+								"value": "false"
+							}
+						},
+						{
+							"id": "start-animation",
+							"objectClass": "BackBtnIcons",
+							"sid": 184292170123695,
+							"disabled": true,
+							"parameters": {
+								"from": "current-frame"
+							}
+						},
+						{
+							"id": "play-by-name",
+							"objectClass": "Audio",
+							"sid": 276720350957133,
+							"parameters": {
+								"folder": "sounds",
+								"audio-file-name": "\"Button_pressed\"",
+								"loop": "not-looping",
+								"volume": "0",
+								"stereo-pan": "0",
+								"tag-optional": "\"Button_pressed\""
+							}
+						},
+						{
+							"id": "tween-two-properties",
+							"objectClass": "BackBtnIcons",
+							"sid": 311772762842444,
+							"behaviorType": "Tween",
+							"parameters": {
+								"tags": "\"bounce-home\"",
+								"property": "size",
+								"end-x": "47",
+								"end-y": "47",
+								"time": "0.3",
+								"ease": "easeinbounce",
+								"destroy-on-complete": "no",
+								"loop": "no",
+								"ping-pong": "yes"
+							}
+						},
+						{
+							"id": "wait-for-previous-actions",
+							"objectClass": "System",
+							"sid": 887646426344663
+						}
+					],
+					"sid": 210240372895370,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "targetLayout",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 835796597023068
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 103012181434218,
+									"parameters": {
+										"first-value": "LayoutName",
+										"comparison": 0,
+										"second-value": "\"Alphabet Selection\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"callFunction": "DestroyTracingObjectsATEnd",
+									"sid": 693098454832435
+								},
+								{
+									"callFunction": "SendAnalytics",
+									"sid": 828694502320693,
+									"parameters": [
+										"\"EventName=\"&EventNames.Get(\"292\")"
+									]
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 195316962230334,
+									"parameters": {
+										"variable": "targetLayout",
+										"value": "\"Home\""
+									}
+								}
+							],
+							"sid": 627316757676209,
+							"isOrBlock": true
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 533967638005862
+								},
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 566659505094743,
+									"parameters": {
+										"first-value": "LayoutName",
+										"comparison": 0,
+										"second-value": "\"Number Selection\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"callFunction": "DestroyTracingObjectsATEnd",
+									"sid": 983681192756960
+								},
+								{
+									"callFunction": "SendAnalytics",
+									"sid": 378291743761321,
+									"parameters": [
+										"\"EventName=\"&EventNames.Get(\"294\")"
+									]
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 881889933850078,
+									"parameters": {
+										"variable": "targetLayout",
+										"value": "\"Home\""
+									}
+								}
+							],
+							"sid": 565981976779669
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 668921056366803
+								},
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 944921937096973,
+									"parameters": {
+										"first-value": "LayoutName",
+										"comparison": 0,
+										"second-value": "\"Number-\"&LettersArray.At(CurrentLetterIndex)"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 810122677697242,
+									"parameters": {
+										"variable": "CanStartTimer",
+										"value": "false"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 712473197908853,
+									"parameters": {
+										"variable": "TimeLapsed",
+										"value": "0"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 826289266632348,
+									"parameters": {
+										"variable": "targetLayout",
+										"value": "\"Number Selection\""
+									}
+								},
+								{
+									"callFunction": "SendAnalytics",
+									"sid": 441571016360186,
+									"parameters": [
+										"\"EventName=\"&EventNames.Get(\"301\")"
+									]
+								}
+							],
+							"sid": 342023310317451
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 738276197050712
+								},
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 984202978941499,
+									"parameters": {
+										"first-value": "LayoutName",
+										"comparison": 0,
+										"second-value": "\"Small-\"&LettersArray.At(CurrentLetterIndex)"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 380971850969188,
+									"parameters": {
+										"variable": "CanStartTimer",
+										"value": "false"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 996120491584076,
+									"parameters": {
+										"variable": "TimeLapsed",
+										"value": "0"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 565001064213893,
+									"parameters": {
+										"variable": "targetLayout",
+										"value": "\"Alphabet Selection\""
+									}
+								},
+								{
+									"callFunction": "SendAnalytics",
+									"sid": 778401401554294,
+									"parameters": [
+										"\"EventName=\"&EventNames.Get(\"300\")"
+									]
+								}
+							],
+							"sid": 499963541452616
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "log",
+									"objectClass": "Browser",
+									"sid": 234620609130574,
+									"parameters": {
+										"type": "log",
+										"message": "\"back: \"&\": \"&LayoutName&\": \"&targetLayout"
+									}
+								},
+								{
+									"id": "wait",
+									"objectClass": "System",
+									"sid": 261218935744575,
+									"disabled": true,
+									"parameters": {
+										"seconds": "0.22"
+									}
+								},
+								{
+									"id": "set-boolean-instvar",
+									"objectClass": "BackButton",
+									"sid": 177213107408121,
+									"parameters": {
+										"instance-variable": "Touch",
+										"value": "true"
+									}
+								},
+								{
+									"id": "go-to-layout-by-name",
+									"objectClass": "System",
+									"sid": 111243172157029,
+									"parameters": {
+										"layout": "targetLayout"
+									}
+								}
+							],
+							"sid": 119083716505317
+						}
+					]
+				}
+			],
+			"sid": 656717866132978
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "Common Functions",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"functionName": "CountTens",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "number",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "num",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 537379713477953
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 798082224263625,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "tens",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 955319127605031
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "while",
+									"objectClass": "System",
+									"sid": 303417425874671
+								},
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 849930593013324,
+									"parameters": {
+										"variable": "num",
+										"comparison": 1,
+										"value": "0"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 931158883792872,
+									"parameters": {
+										"variable": "num",
+										"value": "int(num/10)"
+									}
+								},
+								{
+									"id": "add-to-eventvar",
+									"objectClass": "System",
+									"sid": 580461200378254,
+									"parameters": {
+										"variable": "tens",
+										"value": "1"
+									}
+								}
+							],
+							"sid": 340607649361676
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-function-return-value",
+									"objectClass": "Functions",
+									"sid": 371033588333900,
+									"parameters": {
+										"value": "tens-1"
+									}
+								}
+							],
+							"sid": 433351040253445
+						}
+					]
+				},
+				{
+					"functionName": "ShowLockSubscription",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "activate",
+							"type": "boolean",
+							"initialValue": "false",
+							"comment": "",
+							"sid": 644859013862672
+						},
+						{
+							"name": "letter",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 214461712475308
+						},
+						{
+							"name": "subtype",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 528338580780267
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 357420795872085,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 549201701720465,
+									"parameters": {
+										"variable": "activate"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-instvar-value",
+									"objectClass": "DialogSubs",
+									"sid": 959619514600827,
+									"parameters": {
+										"instance-variable": "Letter",
+										"value": "letter"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "DialogSubs",
+									"sid": 548983523874121,
+									"parameters": {
+										"instance-variable": "type",
+										"value": "subtype"
+									}
+								},
+								{
+									"id": "set-layer-visible",
+									"objectClass": "System",
+									"sid": 139435446704062,
+									"parameters": {
+										"layer": "\"Dialogs\"",
+										"visibility": "visible"
+									}
+								},
+								{
+									"id": "set-scale",
+									"objectClass": "DialogSubs",
+									"sid": 648142055329049,
+									"parameters": {
+										"scale": "0.01"
+									}
+								},
+								{
+									"id": "set-enabled",
+									"objectClass": "S2_Room_List_Panel",
+									"sid": 397422616774889,
+									"behaviorType": "DragDrop",
+									"parameters": {
+										"state": "disabled"
+									}
+								},
+								{
+									"id": "set-group-active",
+									"objectClass": "System",
+									"sid": 813529078362989,
+									"parameters": {
+										"group-name": "\"Letter Selection Events\"",
+										"state": "deactivated"
+									}
+								},
+								{
+									"id": "set-group-active",
+									"objectClass": "System",
+									"sid": 396982648712399,
+									"parameters": {
+										"group-name": "\"Number Selection Events\"",
+										"state": "deactivated"
+									}
+								},
+								{
+									"id": "set-group-active",
+									"objectClass": "System",
+									"sid": 786773244507955,
+									"parameters": {
+										"group-name": "\"HUD\"",
+										"state": "deactivated"
+									}
+								},
+								{
+									"id": "tween-two-properties",
+									"objectClass": "DialogSubs",
+									"sid": 481850330544089,
+									"behaviorType": "Tween",
+									"parameters": {
+										"tags": "\"\"",
+										"property": "scale",
+										"end-x": "1",
+										"end-y": "1",
+										"time": "0.2",
+										"ease": "default",
+										"destroy-on-complete": "no",
+										"loop": "no",
+										"ping-pong": "no"
+									}
+								},
+								{
+									"id": "wait-for-previous-actions",
+									"objectClass": "System",
+									"sid": 472579291001915
+								},
+								{
+									"callFunction": "SendAnalytics",
+									"sid": 453819018414205,
+									"parameters": [
+										"\"toddler_sel_char=\"&letter&\"&toddler_subtype=\"&subtype&\"&EventName=\"&EventNames.Get(\"304\")"
+									]
+								},
+								{
+									"id": "stop",
+									"objectClass": "Audio",
+									"sid": 322915731253782,
+									"parameters": {
+										"tag": "\"get_a_grownup\""
+									}
+								},
+								{
+									"id": "play-by-name",
+									"objectClass": "Audio",
+									"sid": 753131755083077,
+									"parameters": {
+										"folder": "sounds",
+										"audio-file-name": "\"get_a_grownup_\"&country_lang_code",
+										"loop": "not-looping",
+										"volume": "0",
+										"stereo-pan": "0",
+										"tag-optional": "\"get_a_grownup\""
+									}
+								},
+								{
+									"id": "set-group-active",
+									"objectClass": "System",
+									"sid": 846561829423763,
+									"parameters": {
+										"group-name": "\"Dialogs Events\"",
+										"state": "activated"
+									}
+								}
+							],
+							"sid": 708564415508891
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 969808777753269
+								}
+							],
+							"actions": [
+								{
+									"callFunction": "CallUnityAction",
+									"sid": 147339430104641,
+									"parameters": [
+										"\"EventName=\"&EventNames.Get(\"305\")"
+									]
+								},
+								{
+									"id": "tween-two-properties",
+									"objectClass": "DialogSubs",
+									"sid": 556800128137397,
+									"behaviorType": "Tween",
+									"parameters": {
+										"tags": "\"\"",
+										"property": "scale",
+										"end-x": "0.01",
+										"end-y": "0.01",
+										"time": "0.2",
+										"ease": "default",
+										"destroy-on-complete": "no",
+										"loop": "no",
+										"ping-pong": "no"
+									}
+								},
+								{
+									"id": "wait-for-previous-actions",
+									"objectClass": "System",
+									"sid": 291057330591270
+								},
+								{
+									"id": "set-enabled",
+									"objectClass": "S2_Room_List_Panel",
+									"sid": 518418816792991,
+									"behaviorType": "DragDrop",
+									"parameters": {
+										"state": "enabled"
+									}
+								},
+								{
+									"id": "set-layer-visible",
+									"objectClass": "System",
+									"sid": 418029407681914,
+									"parameters": {
+										"layer": "\"Dialogs\"",
+										"visibility": "invisible"
+									}
+								},
+								{
+									"id": "set-group-active",
+									"objectClass": "System",
+									"sid": 543094385034500,
+									"parameters": {
+										"group-name": "\"Letter Selection Events\"",
+										"state": "activated"
+									}
+								},
+								{
+									"id": "set-group-active",
+									"objectClass": "System",
+									"sid": 688998915958781,
+									"parameters": {
+										"group-name": "\"Number Selection Events\"",
+										"state": "activated"
+									}
+								},
+								{
+									"id": "set-group-active",
+									"objectClass": "System",
+									"sid": 987271101218835,
+									"parameters": {
+										"group-name": "\"Dialogs Events\"",
+										"state": "deactivated"
+									}
+								},
+								{
+									"id": "set-group-active",
+									"objectClass": "System",
+									"sid": 758210749787236,
+									"parameters": {
+										"group-name": "\"HUD\"",
+										"state": "activated"
+									}
+								},
+								{
+									"id": "wait",
+									"objectClass": "System",
+									"sid": 870842235121523,
+									"parameters": {
+										"seconds": "0.001"
+									}
+								},
+								{
+									"id": "set-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 163782156655630,
+									"parameters": {
+										"variable": "EXIT_FROM_WEBVIEW",
+										"value": "true"
+									}
+								},
+								{
+									"id": "go-to-layout",
+									"objectClass": "System",
+									"sid": 357131783428661,
+									"parameters": {
+										"layout": "Home"
+									}
+								}
+							],
+							"sid": 841878751876312
+						}
+					]
+				},
+				{
+					"functionName": "SetSubscriptionDialogTexts",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "header",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 340593637807770
+						},
+						{
+							"name": "body",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 863674397421649
+						},
+						{
+							"name": "footer",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 800692529333116
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 127579526271459,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 481047165982996,
+									"parameters": {
+										"variable": "SubscriptionDialogHeader",
+										"value": "header"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 684048472894139,
+									"parameters": {
+										"variable": "SubscriptionDialogBody",
+										"value": "body"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 493596019579949,
+									"parameters": {
+										"variable": "SubscriptionDialogFooter",
+										"value": "footer"
+									}
+								},
+								{
+									"id": "set-text",
+									"objectClass": "TextSubscribeDialogTitle",
+									"sid": 616736666930191,
+									"parameters": {
+										"text": "SubscriptionDialogHeader"
+									}
+								},
+								{
+									"id": "set-text",
+									"objectClass": "TextDialogBody",
+									"sid": 336875090345623,
+									"parameters": {
+										"text": "SubscriptionDialogBody"
+									}
+								},
+								{
+									"id": "set-text",
+									"objectClass": "TextBtnSubscribeOK",
+									"sid": 564076532271059,
+									"parameters": {
+										"text": "SubscriptionDialogFooter"
+									}
+								}
+							],
+							"sid": 511297769904574
+						}
+					]
+				},
+				{
+					"functionName": "SetBodyHTMLColor",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "name",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 275636670034845
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [
+						{
+							"type": "script",
+							"script": "\n\nlet colorRGB = new Map();\ncolorRGB.set(\"Loader\", \"rgb(133, 233, 216)\");\ncolorRGB.set(\"Home\", \"rgb(133, 233, 216)\");\n\ncolorRGB.set(\"Tracing\", \"rgb(0, 198, 163)\");\ncolorRGB.set(\"Alphabet Selection\", \"rgb(0, 198, 163)\");\ncolorRGB.set(\"Number Selection\", \"rgb(0, 198, 163)\");\n\n\nlet color = colorRGB.get(localVars.name);\nconsole.log(\"SET COLOR:====> \", color)\ndocument.body.style.backgroundColor = color;\ndocument.getElementsByTagName(\"html\")[0].style.background =  color;"
+						}
+					],
+					"sid": 460871176195404
+				},
+				{
+					"functionName": "SetLetters_Alignment",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "log",
+							"objectClass": "Browser",
+							"sid": 528711553537089,
+							"parameters": {
+								"type": "log",
+								"message": "\"set letter align\""
+							}
+						}
+					],
+					"sid": 539013878505655,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "diff",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 835393203566861
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 693945468636773,
+									"parameters": {
+										"variable": "diff",
+										"value": "(ViewportHeight(0)-100)- S2_Room_List_Panel.Height "
+									}
+								},
+								{
+									"id": "log",
+									"objectClass": "Browser",
+									"sid": 175283664303191,
+									"parameters": {
+										"type": "log",
+										"message": "\"scroll dist = \"&diff"
+									}
+								}
+							],
+							"sid": 882573463647326
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 710703824828159,
+									"parameters": {
+										"variable": "diff",
+										"comparison": 5,
+										"value": "0"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-group-active",
+									"objectClass": "System",
+									"sid": 837016783649303,
+									"parameters": {
+										"group-name": "\"Scroll Letters\"",
+										"state": "deactivated"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 245054290313003,
+									"parameters": {
+										"variable": "y_top",
+										"value": "ViewportTop(0)+100"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 578469442403555,
+									"parameters": {
+										"variable": "y_top",
+										"value": "ViewportTop(0)+100 +diff/3"
+									}
+								},
+								{
+									"id": "set-y",
+									"objectClass": "S2_Room_List_Panel",
+									"sid": 364420551131397,
+									"parameters": {
+										"y": "y_top"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 262181946668892,
+									"parameters": {
+										"variable": "scroll_pos",
+										"value": "9Patch_Scroller_Handle.Y"
+									}
+								},
+								{
+									"id": "set-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 673881267572443,
+									"parameters": {
+										"variable": "CanScroll",
+										"value": "false"
+									}
+								},
+								{
+									"id": "set-enabled",
+									"objectClass": "S2_Room_List_Panel",
+									"sid": 810768578220517,
+									"behaviorType": "DragDrop",
+									"parameters": {
+										"state": "disabled"
+									}
+								},
+								{
+									"id": "set-visible",
+									"objectClass": "9Patch_ScrollerBg",
+									"sid": 434151993910188,
+									"parameters": {
+										"visibility": "invisible"
+									}
+								},
+								{
+									"id": "set-visible",
+									"objectClass": "9Patch_Scroller_Handle",
+									"sid": 772546677326174,
+									"parameters": {
+										"visibility": "invisible"
+									}
+								},
+								{
+									"id": "set-height",
+									"objectClass": "ClickableArea",
+									"sid": 511330574596188,
+									"parameters": {
+										"height": "S2_Room_List_Panel.Height"
+									}
+								},
+								{
+									"id": "set-position-to-another-object",
+									"objectClass": "ClickableArea",
+									"sid": 864101624349456,
+									"parameters": {
+										"object": "S2_Room_List_Panel",
+										"image-point-optional": "0"
+									}
+								},
+								{
+									"id": "set-position",
+									"objectClass": "9Patch_ScrollerBg",
+									"sid": 541646493353701,
+									"parameters": {
+										"x": "ViewportRight(0)-Self.Width",
+										"y": "S2_Room_List_Panel.Y"
+									}
+								},
+								{
+									"id": "set-height",
+									"objectClass": "9Patch_ScrollerBg",
+									"sid": 815670716657523,
+									"parameters": {
+										"height": "ViewportHeight(0) - (Top_Scroller_Padding+Bottom_Scroller_Paddiing)"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "9Patch_ScrollerBg",
+									"sid": 288207248536967,
+									"parameters": {
+										"instance-variable": "initial_Y_gap",
+										"value": "S2_Room_List_Panel.Height-Self.Height"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "9Patch_ScrollerBg",
+									"sid": 704760715588448,
+									"parameters": {
+										"instance-variable": "InitY",
+										"value": "S2_Room_List_Panel.Y"
+									}
+								},
+								{
+									"id": "set-position",
+									"objectClass": "9Patch_Scroller_Handle",
+									"sid": 289709010548594,
+									"parameters": {
+										"x": "9Patch_ScrollerBg.X",
+										"y": "9Patch_ScrollerBg.Y"
+									}
+								},
+								{
+									"id": "set-group-active",
+									"objectClass": "System",
+									"sid": 932509154064187,
+									"parameters": {
+										"group-name": "\"Scroll Letters\"",
+										"state": "deactivated"
+									}
+								}
+							],
+							"sid": 374231435126915
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 707079752844602
+								}
+							],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 247739822205140,
+									"parameters": {
+										"variable": "y_top",
+										"value": "ViewportTop(0)+100"
+									}
+								},
+								{
+									"id": "set-y",
+									"objectClass": "S2_Room_List_Panel",
+									"sid": 479282062321865,
+									"parameters": {
+										"y": "y_top"
+									}
+								},
+								{
+									"id": "set-group-active",
+									"objectClass": "System",
+									"sid": 486744294016901,
+									"parameters": {
+										"group-name": "\"Scroll Letters\"",
+										"state": "activated"
+									}
+								},
+								{
+									"id": "set-height",
+									"objectClass": "ClickableArea",
+									"sid": 797650418584957,
+									"parameters": {
+										"height": "S2_Room_List_Panel.Height"
+									}
+								},
+								{
+									"id": "set-position-to-another-object",
+									"objectClass": "ClickableArea",
+									"sid": 298525937036774,
+									"parameters": {
+										"object": "S2_Room_List_Panel",
+										"image-point-optional": "0"
+									}
+								},
+								{
+									"id": "set-position",
+									"objectClass": "9Patch_ScrollerBg",
+									"sid": 758840535879048,
+									"parameters": {
+										"x": "ViewportRight(0)-Self.Width",
+										"y": "S2_Room_List_Panel.Y"
+									}
+								},
+								{
+									"id": "set-height",
+									"objectClass": "9Patch_ScrollerBg",
+									"sid": 967996668282920,
+									"parameters": {
+										"height": "ViewportHeight(0) - (Top_Scroller_Padding+Bottom_Scroller_Paddiing)"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "9Patch_ScrollerBg",
+									"sid": 246130938445509,
+									"parameters": {
+										"instance-variable": "initial_Y_gap",
+										"value": "S2_Room_List_Panel.Height-Self.Height"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "9Patch_ScrollerBg",
+									"sid": 609697513641760,
+									"parameters": {
+										"instance-variable": "InitY",
+										"value": "S2_Room_List_Panel.Y"
+									}
+								},
+								{
+									"id": "set-position",
+									"objectClass": "9Patch_Scroller_Handle",
+									"sid": 415541257415336,
+									"parameters": {
+										"x": "9Patch_ScrollerBg.X",
+										"y": "9Patch_ScrollerBg.Y"
+									}
+								},
+								{
+									"id": "set-y",
+									"objectClass": "S2_Room_List_Panel",
+									"sid": 819930179514359,
+									"parameters": {
+										"y": "Self.Y-scroll_pos"
+									}
+								}
+							],
+							"sid": 767286569526882
+						}
+					]
+				}
+			],
+			"sid": 990963048350239
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "Scroll Letters",
+			"description": "",
+			"isActiveOnStart": false,
+			"children": [
+				{
+					"eventType": "comment",
+					"text": "Scroll By Dragging"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-drag-start",
+							"objectClass": "S2_Room_List_Panel",
+							"sid": 591538713021607,
+							"behaviorType": "DragDrop"
+						}
+					],
+					"actions": [
+						{
+							"id": "set-speed",
+							"objectClass": "S2_Room_List_Panel",
+							"sid": 380105748827473,
+							"behaviorType": "Bullet",
+							"parameters": {
+								"speed": "0"
+							}
+						}
+					],
+					"sid": 113630678279714
+				},
+				{
+					"eventType": "comment",
+					"text": "inertia"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-nth-touch-end",
+							"objectClass": "Touch",
+							"sid": 923394319062330,
+							"parameters": {
+								"touch-number": "0"
+							}
+						},
+						{
+							"id": "is-touching-object",
+							"objectClass": "Touch",
+							"sid": 572049996305393,
+							"parameters": {
+								"object": "S2_Room_List_Panel"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 671390278240476,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-between-angles",
+									"objectClass": "System",
+									"sid": 935728759687578,
+									"parameters": {
+										"angle": "Touch.AngleAt(0)",
+										"first-angle": "60",
+										"second-angle": "120"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-speed",
+									"objectClass": "S2_Room_List_Panel",
+									"sid": 858470779001680,
+									"behaviorType": "Bullet",
+									"parameters": {
+										"speed": "Touch.SpeedAt(0)/3"
+									}
+								},
+								{
+									"id": "set-angle-of-motion",
+									"objectClass": "S2_Room_List_Panel",
+									"sid": 866223893787897,
+									"behaviorType": "Bullet",
+									"parameters": {
+										"angle": "90"
+									}
+								}
+							],
+							"sid": 100847699150523,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [],
+									"actions": [
+										{
+											"id": "set-acceleration",
+											"objectClass": "S2_Room_List_Panel",
+											"sid": 524743481013514,
+											"behaviorType": "Bullet",
+											"parameters": {
+												"acceleration": "-Self.Bullet.Speed"
+											}
+										}
+									],
+									"sid": 370446106544784
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 378809803079040
+								},
+								{
+									"id": "is-between-angles",
+									"objectClass": "System",
+									"sid": 933032451654056,
+									"parameters": {
+										"angle": "Touch.AngleAt(0)",
+										"first-angle": "240",
+										"second-angle": "300"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-speed",
+									"objectClass": "S2_Room_List_Panel",
+									"sid": 723926760529137,
+									"behaviorType": "Bullet",
+									"parameters": {
+										"speed": "Touch.SpeedAt(0)/3"
+									}
+								},
+								{
+									"id": "set-angle-of-motion",
+									"objectClass": "S2_Room_List_Panel",
+									"sid": 673723333988802,
+									"behaviorType": "Bullet",
+									"parameters": {
+										"angle": "-90"
+									}
+								}
+							],
+							"sid": 708629949116740,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [],
+									"actions": [
+										{
+											"id": "set-acceleration",
+											"objectClass": "S2_Room_List_Panel",
+											"sid": 487728713921914,
+											"behaviorType": "Bullet",
+											"parameters": {
+												"acceleration": "-Self.Bullet.Speed"
+											}
+										}
+									],
+									"sid": 416176296031862
+								}
+							]
+						}
+					]
+				},
+				{
+					"eventType": "comment",
+					"text": "Scroll By Mouse Wheel"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-mouse-wheel",
+							"objectClass": "Mouse2",
+							"sid": 555531263962150,
+							"parameters": {
+								"direction": "up"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-speed",
+							"objectClass": "S2_Room_List_Panel",
+							"sid": 983624022741616,
+							"behaviorType": "Bullet",
+							"parameters": {
+								"speed": "800"
+							}
+						},
+						{
+							"id": "set-acceleration",
+							"objectClass": "S2_Room_List_Panel",
+							"sid": 938635439275670,
+							"behaviorType": "Bullet",
+							"parameters": {
+								"acceleration": "-2000"
+							}
+						},
+						{
+							"id": "set-angle-of-motion",
+							"objectClass": "S2_Room_List_Panel",
+							"sid": 783513036432886,
+							"behaviorType": "Bullet",
+							"parameters": {
+								"angle": "90"
+							}
+						}
+					],
+					"sid": 251064477617907
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-mouse-wheel",
+							"objectClass": "Mouse2",
+							"sid": 942905991795216,
+							"parameters": {
+								"direction": "down"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-speed",
+							"objectClass": "S2_Room_List_Panel",
+							"sid": 123241148786319,
+							"behaviorType": "Bullet",
+							"parameters": {
+								"speed": "800"
+							}
+						},
+						{
+							"id": "set-acceleration",
+							"objectClass": "S2_Room_List_Panel",
+							"sid": 730975976511149,
+							"behaviorType": "Bullet",
+							"parameters": {
+								"acceleration": "-2000"
+							}
+						},
+						{
+							"id": "set-angle-of-motion",
+							"objectClass": "S2_Room_List_Panel",
+							"sid": 645058991320909,
+							"behaviorType": "Bullet",
+							"parameters": {
+								"angle": "-90"
+							}
+						}
+					],
+					"sid": 159278388894321
+				},
+				{
+					"eventType": "comment",
+					"text": "Limit Scroll"
+				},
+				{
+					"eventType": "variable",
+					"name": "Scroll_Room_List_Top_Boundary",
+					"type": "number",
+					"initialValue": "100",
+					"comment": "853",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 242257219449124
+				},
+				{
+					"eventType": "variable",
+					"name": "Scroll_Room_List_Bot_Boundary",
+					"type": "number",
+					"initialValue": "854",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 948778176591108
+				},
+				{
+					"eventType": "variable",
+					"name": "padding",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 965040536486385
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 451276393762373,
+							"parameters": {
+								"variable": "Scroll_Room_List_Top_Boundary",
+								"value": "ViewportTop(0)+Top_Scroller_Padding"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 205936495653382,
+							"parameters": {
+								"variable": "Scroll_Room_List_Bot_Boundary",
+								"value": "ViewportBottom(0)"
+							}
+						}
+					],
+					"sid": 309806418205949
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 439734869318898,
+							"parameters": {
+								"first-value": "9Patch_Scroller_Handle.BBoxTop",
+								"comparison": 3,
+								"second-value": "9Patch_ScrollerBg.Y"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-y",
+							"objectClass": "9Patch_Scroller_Handle",
+							"sid": 103791825524438,
+							"parameters": {
+								"y": "9Patch_ScrollerBg.BBoxTop"
+							}
+						}
+					],
+					"sid": 426465490811869
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 822709815310242,
+							"parameters": {
+								"first-value": "9Patch_Scroller_Handle.BBoxBottom",
+								"comparison": 5,
+								"second-value": "9Patch_ScrollerBg.BBoxBottom"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-y",
+							"objectClass": "9Patch_Scroller_Handle",
+							"sid": 776768674272748,
+							"parameters": {
+								"y": "9Patch_ScrollerBg.BBoxBottom-9Patch_Scroller_Handle.Height"
+							}
+						}
+					],
+					"sid": 812579995093743
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-dragging",
+							"objectClass": "9Patch_Scroller_Handle",
+							"sid": 413821289523643,
+							"behaviorType": "DragDrop"
+						},
+						{
+							"id": "is-between-values",
+							"objectClass": "System",
+							"sid": 701824539762092,
+							"parameters": {
+								"value": "9Patch_Scroller_Handle.Y",
+								"lower-bound": "9Patch_ScrollerBg.Y",
+								"upper-bound": "9Patch_ScrollerBg.Y+9Patch_ScrollerBg.Height-9Patch_Scroller_Handle.Height"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-y",
+							"objectClass": "S2_Room_List_Panel",
+							"sid": 213129705614580,
+							"parameters": {
+								"y": "9Patch_ScrollerBg.Y- ((9Patch_Scroller_Handle.Y-9Patch_ScrollerBg.Y)*(S2_Room_List_Panel.Height-9Patch_ScrollerBg.Height)/(9Patch_ScrollerBg.Height-9Patch_Scroller_Handle.Height))"
+							}
+						}
+					],
+					"sid": 173012676810690
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-dragging",
+							"objectClass": "9Patch_Scroller_Handle",
+							"sid": 900128794358429,
+							"behaviorType": "DragDrop",
+							"isInverted": true
+						}
+					],
+					"actions": [
+						{
+							"id": "set-y",
+							"objectClass": "S2_Room_List_Panel",
+							"sid": 744574757575170,
+							"parameters": {
+								"y": "clamp(Self.Y, Scroll_Room_List_Bot_Boundary-Self.Height-Bottom_Scroller_Paddiing, Scroll_Room_List_Top_Boundary)"
+							}
+						},
+						{
+							"id": "set-y",
+							"objectClass": "9Patch_Scroller_Handle",
+							"sid": 159678351320268,
+							"parameters": {
+								"y": "9Patch_ScrollerBg.Y+(9Patch_ScrollerBg.Height-9Patch_Scroller_Handle.Height)*(9Patch_ScrollerBg.Y-S2_Room_List_Panel.Y)/(9Patch_ScrollerBg.initial_Y_gap)"
+							}
+						}
+					],
+					"sid": 347248798566875
+				}
+			],
+			"sid": 866496797452784
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 225838598816574
+				}
+			],
+			"actions": [
+				{
+					"callFunction": "StopTracingScreenSounds",
+					"sid": 782067607784752
+				}
+			],
+			"sid": 653383140798504,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-tag-playing",
+							"objectClass": "Audio",
+							"sid": 897294746335264,
+							"parameters": {
+								"tag": "\"get_a_grownup\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "stop",
+							"objectClass": "Audio",
+							"sid": 415929431270492,
+							"parameters": {
+								"tag": "\"get_a_grownup\""
+							}
+						}
+					],
+					"sid": 419860444067976
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-double-tap",
+					"objectClass": "Touch",
+					"sid": 521031610136479
+				}
+			],
+			"actions": [],
+			"sid": 872303137269047,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-fullscreen",
+							"objectClass": "Browser",
+							"sid": 832647412014612
+						}
+					],
+					"actions": [
+						{
+							"id": "cancel-fullscreen",
+							"objectClass": "Browser",
+							"sid": 678033109891877
+						}
+					],
+					"sid": 292265685666028
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 476715997218410
+						}
+					],
+					"actions": [
+						{
+							"id": "request-fullscreen",
+							"objectClass": "Browser",
+							"sid": 524667605656467,
+							"parameters": {
+								"mode": "stretch-scale-outer",
+								"navigation-ui": "auto"
+							}
+						}
+					],
+					"sid": 433680157130311
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-end-of-layout",
+					"objectClass": "System",
+					"sid": 301970398194793
+				}
+			],
+			"actions": [
+				{
+					"id": "stop-all",
+					"objectClass": "Audio",
+					"sid": 927296941026008
+				}
+			],
+			"sid": 832646484055015
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-suspend",
+					"objectClass": "System",
+					"sid": 507465630762322
+				}
+			],
+			"actions": [
+				{
+					"id": "set-time-scale",
+					"objectClass": "System",
+					"sid": 110194704102216,
+					"disabled": true,
+					"parameters": {
+						"time-scale": "0"
+					}
+				},
+				{
+					"type": "script",
+					"script": "console.log(\"SUSPENDED!!!!!\")"
+				}
+			],
+			"sid": 292615614444954
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-resume",
+					"objectClass": "System",
+					"sid": 885855028295250
+				}
+			],
+			"actions": [
+				{
+					"id": "set-time-scale",
+					"objectClass": "System",
+					"sid": 799102440088066,
+					"disabled": true,
+					"parameters": {
+						"time-scale": "1"
+					}
+				},
+				{
+					"type": "script",
+					"script": "console.log(\"RESUMED!!!!!\")"
+				}
+			],
+			"sid": 626156633156043
+		}
+	],
+	"sid": 261339869763387
+}

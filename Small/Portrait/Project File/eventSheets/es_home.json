@@ -1,0 +1,681 @@
+{
+	"name": "es_Home",
+	"events": [
+		{
+			"eventType": "include",
+			"includeSheet": "es_Common"
+		},
+		{
+			"eventType": "variable",
+			"name": "QUESTION_TYPE",
+			"type": "string",
+			"initialValue": "tracing_content",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 617730840730189
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 388508779778986
+				}
+			],
+			"actions": [
+				{
+					"callFunction": "SetBodyHTMLColor",
+					"sid": 804272293846667,
+					"parameters": [
+						"LayoutName"
+					]
+				},
+				{
+					"id": "set-boolean-eventvar",
+					"objectClass": "System",
+					"sid": 191452331477674,
+					"parameters": {
+						"variable": "CanStartTimer",
+						"value": "false"
+					}
+				},
+				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 382342115465052,
+					"parameters": {
+						"variable": "TimeLapsed",
+						"value": "0"
+					}
+				},
+				{
+					"id": "set-animation",
+					"objectClass": "MASCOT_CHARACTERS",
+					"sid": 736746436414770,
+					"parameters": {
+						"animation": "JsonEntryData.Get(\".MascotName\")",
+						"from": "beginning"
+					}
+				},
+				{
+					"id": "stop-animation",
+					"objectClass": "MASCOT_CHARACTERS",
+					"sid": 152677307394407
+				}
+			],
+			"sid": 727485650853907,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-animation-playing",
+							"objectClass": "MASCOT_CHARACTERS",
+							"sid": 622191238116532,
+							"parameters": {
+								"animation": "\"Duck\""
+							}
+						},
+						{
+							"id": "is-animation-playing",
+							"objectClass": "MASCOT_CHARACTERS",
+							"sid": 518906660008761,
+							"parameters": {
+								"animation": "\"Owl\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-scale",
+							"objectClass": "MASCOT_CHARACTERS",
+							"sid": 359320918118671,
+							"parameters": {
+								"scale": "MASCOT_CHARACTERS.AnimationName=\"Duck\"?0.7:MASCOT_CHARACTERS.AnimationName=\"Owl\"?0.5:1"
+							}
+						}
+					],
+					"sid": 141428685852342,
+					"isOrBlock": true
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 668884720948414,
+							"parameters": {
+								"variable": "IsFirstTime"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "FillEventDictinary",
+							"sid": 812997412850483
+						},
+						{
+							"id": "set-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 295310150206056,
+							"parameters": {
+								"variable": "IsFirstTime",
+								"value": "false"
+							}
+						},
+						{
+							"id": "wait",
+							"objectClass": "System",
+							"sid": 429965338826192,
+							"parameters": {
+								"seconds": "50*dt"
+							}
+						},
+						{
+							"type": "script",
+							"script": "if(!runtime.globalVars.IS_ANALYTICS) return;\nconst data =runtime.objects.EventNames.getFirstInstance().getDataMap();\n\n// alert(data.get(\"278\"));\nwindow.location.href = \"skidoswebview://SkidosTracingPageLanded?is_reached=1&EventName=\"+data.get(\"278\");\n\n"
+						}
+					],
+					"sid": 718619942922508
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 195159329259708
+						},
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 796672715549535,
+							"parameters": {
+								"variable": "EXIT_FROM_WEBVIEW"
+							},
+							"isInverted": true
+						}
+					],
+					"actions": [
+						{
+							"id": "play-by-name",
+							"objectClass": "Audio",
+							"sid": 752798380532944,
+							"parameters": {
+								"folder": "sounds",
+								"audio-file-name": "\"Neta_Intro_SHORT\"",
+								"loop": "not-looping",
+								"volume": "0",
+								"stereo-pan": "0",
+								"tag-optional": "\"\""
+							}
+						},
+						{
+							"callFunction": "ShowMascotAnim",
+							"sid": 284404508899835
+						}
+					],
+					"sid": 947038508753728
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 548598410009500,
+							"parameters": {
+								"variable": "EXIT_FROM_WEBVIEW",
+								"value": "false"
+							}
+						},
+						{
+							"callFunction": "SetHome",
+							"sid": 151853417717587
+						}
+					],
+					"sid": 363240569344326
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-end-of-layout",
+					"objectClass": "System",
+					"sid": 578608507230544
+				}
+			],
+			"actions": [
+				{
+					"id": "destroy",
+					"objectClass": "Stripes_NEW",
+					"sid": 501955023391367
+				}
+			],
+			"sid": 626102219235573
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "Home Functions",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "comment",
+					"text": "Two variables to make the curve path throught the position of the \"point\" sprites "
+				},
+				{
+					"eventType": "variable",
+					"name": "Xcurv",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 259191430737430
+				},
+				{
+					"eventType": "variable",
+					"name": "Ycurv",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 719192445700912
+				},
+				{
+					"functionName": "SetHome",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "log",
+							"objectClass": "Browser",
+							"sid": 432568535218116,
+							"parameters": {
+								"type": "log",
+								"message": "\"SetHome called- \"&JsonEntryData.Get(\".MascotName\")"
+							}
+						},
+						{
+							"id": "set-group-active",
+							"objectClass": "System",
+							"sid": 830956507738541,
+							"parameters": {
+								"group-name": "\"Home Events\"",
+								"state": "activated"
+							}
+						},
+						{
+							"id": "set-text",
+							"objectClass": "DefaultText",
+							"sid": 170276792767354,
+							"parameters": {
+								"text": "JsonEntryData.Get(\".Title\")"
+							}
+						}
+					],
+					"sid": 176272753461419,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 426834070823065,
+									"parameters": {
+										"first-value": "JsonEntryData.Get(\".Subjects.0\")",
+										"comparison": 0,
+										"second-value": "\"ABC\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-position",
+									"objectClass": "Btn_ABC",
+									"sid": 400646994761192,
+									"parameters": {
+										"x": "128",
+										"y": "704"
+									}
+								},
+								{
+									"id": "set-position",
+									"objectClass": "Btn_123",
+									"sid": 650825056619521,
+									"parameters": {
+										"x": "352",
+										"y": "704"
+									}
+								}
+							],
+							"sid": 499467995346473
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 742023260064239
+								}
+							],
+							"actions": [
+								{
+									"id": "set-position",
+									"objectClass": "Btn_123",
+									"sid": 639368713939611,
+									"parameters": {
+										"x": "128",
+										"y": "704"
+									}
+								},
+								{
+									"id": "set-position",
+									"objectClass": "Btn_ABC",
+									"sid": 352046839193359,
+									"parameters": {
+										"x": "352",
+										"y": "704"
+									}
+								}
+							],
+							"sid": 213136509821302
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 144577676446721,
+									"parameters": {
+										"first-value": "len(DefaultText.Text)",
+										"comparison": 2,
+										"second-value": "21"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-y",
+									"objectClass": "DefaultText",
+									"sid": 186128684177793,
+									"disabled": true,
+									"parameters": {
+										"y": "Self.Y - 8"
+									}
+								},
+								{
+									"id": "set-font-size",
+									"objectClass": "DefaultText",
+									"sid": 341325027010636,
+									"parameters": {
+										"size-pt": "21"
+									}
+								}
+							],
+							"sid": 304553192668537,
+							"isOrBlock": true
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 334826478355876
+								},
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 514882885899088,
+									"parameters": {
+										"first-value": "len(DefaultText.Text)",
+										"comparison": 2,
+										"second-value": "25"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-font-size",
+									"objectClass": "DefaultText",
+									"sid": 956816623853416,
+									"parameters": {
+										"size-pt": "19"
+									}
+								}
+							],
+							"sid": 950248791088704
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 744411123483481
+								},
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 861001653047120,
+									"parameters": {
+										"first-value": "len(DefaultText.Text)",
+										"comparison": 3,
+										"second-value": "40"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-font-size",
+									"objectClass": "DefaultText",
+									"sid": 659639593350818,
+									"parameters": {
+										"size-pt": "17"
+									}
+								}
+							],
+							"sid": 873868734885701
+						}
+					]
+				},
+				{
+					"functionName": "ShowMascotAnim",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [
+						{
+							"callFunction": "SendAnalytics",
+							"sid": 542915869567645,
+							"parameters": [
+								"\"EventName=\"&EventNames.Get(\"278\")&\"&QuestionType=\"&QUESTION_TYPE"
+							]
+						},
+						{
+							"id": "log",
+							"objectClass": "Browser",
+							"sid": 173631749837656,
+							"parameters": {
+								"type": "log",
+								"message": "\"Showanim called- \"&JsonEntryData.Get(\".MascotName\")"
+							}
+						},
+						{
+							"id": "stop-animation",
+							"objectClass": "MASCOT_CHARACTERS",
+							"sid": 770096269785542
+						},
+						{
+							"id": "set-animation-frame",
+							"objectClass": "MASCOT_CHARACTERS",
+							"sid": 697263515187370,
+							"parameters": {
+								"frame-number": "0"
+							}
+						},
+						{
+							"id": "set-animation",
+							"objectClass": "MASCOT_CHARACTERS",
+							"sid": 592561936964690,
+							"parameters": {
+								"animation": "JsonEntryData.Get(\".MascotName\")",
+								"from": "beginning"
+							}
+						},
+						{
+							"id": "move-to-object",
+							"objectClass": "MASCOT_CHARACTERS",
+							"sid": 343191249699590,
+							"parameters": {
+								"where": "in-front",
+								"object": "DefaultText"
+							}
+						},
+						{
+							"id": "stop-tweens",
+							"objectClass": "MASCOT_CHARACTERS",
+							"sid": 336503491453162,
+							"behaviorType": "Tween",
+							"parameters": {
+								"tags": "\"fly\""
+							}
+						},
+						{
+							"id": "tween-one-property",
+							"objectClass": "MASCOT_CHARACTERS",
+							"sid": 326837821370276,
+							"behaviorType": "Tween",
+							"parameters": {
+								"tags": "\"fly\"",
+								"property": "offsetY",
+								"end-value": "Self.Y - 100",
+								"time": "0.7",
+								"ease": "default",
+								"destroy-on-complete": "no",
+								"loop": "no",
+								"ping-pong": "yes"
+							}
+						}
+					],
+					"sid": 238822770192801,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-animation-playing",
+									"objectClass": "MASCOT_CHARACTERS",
+									"sid": 374520987001996,
+									"parameters": {
+										"animation": "\"Duck\""
+									}
+								},
+								{
+									"id": "is-animation-playing",
+									"objectClass": "MASCOT_CHARACTERS",
+									"sid": 987590940618560,
+									"parameters": {
+										"animation": "\"Owl\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-scale",
+									"objectClass": "MASCOT_CHARACTERS",
+									"sid": 280393422880158,
+									"parameters": {
+										"scale": "MASCOT_CHARACTERS.AnimationName=\"Duck\"?0.7:MASCOT_CHARACTERS.AnimationName=\"Owl\"?0.5:1"
+									}
+								}
+							],
+							"sid": 465335147477289,
+							"isOrBlock": true
+						}
+					]
+				}
+			],
+			"sid": 920650202095624
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "Home Events",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-touched-object",
+							"objectClass": "Touch",
+							"sid": 345581239441139,
+							"parameters": {
+								"object": "PlayButton"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "SendAnalytics",
+							"sid": 812153723136830,
+							"parameters": [
+								"PlayButton.TargetLayout = \"Alphabet Selection\"? \"EventName=\"&EventNames.Get(\"279\"):\"EventName=\"&EventNames.Get(\"280\")"
+							]
+						},
+						{
+							"id": "play-by-name",
+							"objectClass": "Audio",
+							"sid": 424079971845450,
+							"parameters": {
+								"folder": "sounds",
+								"audio-file-name": "\"Button_pressed\"",
+								"loop": "not-looping",
+								"volume": "0",
+								"stereo-pan": "0",
+								"tag-optional": "\"Button_pressed\""
+							}
+						},
+						{
+							"id": "set-group-active",
+							"objectClass": "System",
+							"sid": 136155322284315,
+							"parameters": {
+								"group-name": "\"Home Events\"",
+								"state": "deactivated"
+							}
+						},
+						{
+							"id": "tween-two-properties",
+							"objectClass": "PlayButton",
+							"sid": 583440251247547,
+							"behaviorType": "Tween",
+							"parameters": {
+								"tags": "\"\"",
+								"property": "scale",
+								"end-x": "0.42",
+								"end-y": "0.42",
+								"time": "0.05",
+								"ease": "easeoutback",
+								"destroy-on-complete": "no",
+								"loop": "no",
+								"ping-pong": "yes"
+							}
+						},
+						{
+							"id": "wait-for-previous-actions",
+							"objectClass": "System",
+							"sid": 604842002397732
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 323220935125143,
+							"parameters": {
+								"variable": "scroll_pos",
+								"value": "0"
+							}
+						},
+						{
+							"id": "go-to-layout-by-name",
+							"objectClass": "System",
+							"sid": 500763165995940,
+							"parameters": {
+								"layout": "PlayButton.TargetLayout"
+							}
+						}
+					],
+					"sid": 616501854728710
+				}
+			],
+			"sid": 906634767070648
+		}
+	],
+	"sid": 892728743363082
+}
