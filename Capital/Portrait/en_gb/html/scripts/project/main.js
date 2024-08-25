@@ -73,16 +73,16 @@ runOnStartup(async (runtime) => {
       console.log('Reloading app on resume with localstorage');
       IS_RELOADING = true;
       mainData = JSON.parse(localData);
-      runtime.globalVars.IS_ANALYTICS = true;
-      runtime.globalVars.IS_TESTING = false;
+      runtime.globalVars.IS_ANALYTICS = false;
+      runtime.globalVars.IS_TESTING = true;
       setTimeout(() => {
         localStorage.clear();
       }, 100);
     } else {
       // 			let langCode = await getLangCode();
       mainData = await runtime.assets.fetchJson('en_gb.json');
-      runtime.globalVars.IS_ANALYTICS = true;
-      runtime.globalVars.IS_TESTING = false;
+      runtime.globalVars.IS_ANALYTICS = false;
+      runtime.globalVars.IS_TESTING = true;
     }
     runtime.globalVars.JsonDataStr = JSON.stringify(mainData);
     console.log(mainData);
