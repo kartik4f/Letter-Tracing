@@ -41,8 +41,8 @@ runOnStartup(async (runtime) => {
       runtime.globalVars.IS_BALLOON_CLICKED = false;
     else runtime.globalVars.IS_BALLOON_CLICKED = mainData.balloonClicked;
     mainData = undefined;
-    runtime.globalVars.IS_ANALYTICS = true;
-    runtime.globalVars.IS_TESTING = false;
+    runtime.globalVars.IS_ANALYTICS = false;
+    runtime.globalVars.IS_TESTING = true;
 
     if (lockedData) {
       console.log('lockedData: ' + lockedData.header);
